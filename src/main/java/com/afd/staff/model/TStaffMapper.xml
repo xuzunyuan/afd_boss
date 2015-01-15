@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiwang.staff.dao.TStaffMapper" >
+  <resultMap id="BaseResultMap" type="com.yiwang.staff.model.TStaff" >
+    <id column="staff_id" property="staffId" jdbcType="INTEGER" />
+    <result column="login_name" property="loginName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="private_key" property="privateKey" jdbcType="VARCHAR" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="addr" property="addr" jdbcType="VARCHAR" />
+    <result column="zip_code" property="zipCode" jdbcType="CHAR" />
+    <result column="mobile" property="mobile" jdbcType="CHAR" />
+    <result column="tele" property="tele" jdbcType="VARCHAR" />
+    <result column="qq" property="qq" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="type" property="type" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    staff_id, login_name, password, private_key, real_name, nick_name, addr, zip_code, 
+    mobile, tele, qq, email, remark, status, type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yiwang.staff.model.TStaffExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_staff
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_staff
+    where staff_id = #{staffId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_staff
+    where staff_id = #{staffId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yiwang.staff.model.TStaffExample" >
+    delete from t_staff
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yiwang.staff.model.TStaff" >
+    <selectKey resultType="java.lang.Integer" keyProperty="staffId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_staff (login_name, password, private_key, 
+      real_name, nick_name, addr, 
+      zip_code, mobile, tele, qq, 
+      email, remark, status, 
+      type)
+    values (#{loginName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{privateKey,jdbcType=VARCHAR}, 
+      #{realName,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{addr,jdbcType=VARCHAR}, 
+      #{zipCode,jdbcType=CHAR}, #{mobile,jdbcType=CHAR}, #{tele,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{type,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yiwang.staff.model.TStaff" >
+    <selectKey resultType="java.lang.Integer" keyProperty="staffId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_staff
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="loginName != null" >
+        login_name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="privateKey != null" >
+        private_key,
+      </if>
+      <if test="realName != null" >
+        real_name,
+      </if>
+      <if test="nickName != null" >
+        nick_name,
+      </if>
+      <if test="addr != null" >
+        addr,
+      </if>
+      <if test="zipCode != null" >
+        zip_code,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="tele != null" >
+        tele,
+      </if>
+      <if test="qq != null" >
+        qq,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="loginName != null" >
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="privateKey != null" >
+        #{privateKey,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null" >
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null" >
+        #{zipCode,jdbcType=CHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=CHAR},
+      </if>
+      <if test="tele != null" >
+        #{tele,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yiwang.staff.model.TStaffExample" resultType="java.lang.Integer" >
+    select count(*) from t_staff
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_staff
+    <set >
+      <if test="record.staffId != null" >
+        staff_id = #{record.staffId,jdbcType=INTEGER},
+      </if>
+      <if test="record.loginName != null" >
+        login_name = #{record.loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.privateKey != null" >
+        private_key = #{record.privateKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realName != null" >
+        real_name = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickName != null" >
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addr != null" >
+        addr = #{record.addr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zipCode != null" >
+        zip_code = #{record.zipCode,jdbcType=CHAR},
+      </if>
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=CHAR},
+      </if>
+      <if test="record.tele != null" >
+        tele = #{record.tele,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qq != null" >
+        qq = #{record.qq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_staff
+    set staff_id = #{record.staffId,jdbcType=INTEGER},
+      login_name = #{record.loginName,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      private_key = #{record.privateKey,jdbcType=VARCHAR},
+      real_name = #{record.realName,jdbcType=VARCHAR},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      addr = #{record.addr,jdbcType=VARCHAR},
+      zip_code = #{record.zipCode,jdbcType=CHAR},
+      mobile = #{record.mobile,jdbcType=CHAR},
+      tele = #{record.tele,jdbcType=VARCHAR},
+      qq = #{record.qq,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR},
+      type = #{record.type,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yiwang.staff.model.TStaff" >
+    update t_staff
+    <set >
+      <if test="loginName != null" >
+        login_name = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="privateKey != null" >
+        private_key = #{privateKey,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null" >
+        addr = #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null" >
+        zip_code = #{zipCode,jdbcType=CHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=CHAR},
+      </if>
+      <if test="tele != null" >
+        tele = #{tele,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=CHAR},
+      </if>
+    </set>
+    where staff_id = #{staffId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yiwang.staff.model.TStaff" >
+    update t_staff
+    set login_name = #{loginName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      private_key = #{privateKey,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      addr = #{addr,jdbcType=VARCHAR},
+      zip_code = #{zipCode,jdbcType=CHAR},
+      mobile = #{mobile,jdbcType=CHAR},
+      tele = #{tele,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      type = #{type,jdbcType=CHAR}
+    where staff_id = #{staffId,jdbcType=INTEGER}
+  </update>
+  
+   <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_staff
+    <if test="status != null" >
+      where status = #{status,jdbcType=CHAR}
+    </if>
+  </select>
+  <select id="selectAllByPage" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_staff
+    <if test="status != null" >
+      where status = #{status,jdbcType=CHAR}
+    </if>
+  </select>
+  
+  <select id="queryByConditionsPage" resultMap="BaseResultMap">
+		select distinct t1.* from t_staff t1 left outer join t_staff_role t2 on t1.staff_id = t2.staff_id
+		<where>
+			<if test="cond.loginName != null" >
+		 	 		<bind name="loginName" value="'%' + cond.loginName + '%'" />
+		 	 	    and t1.LOGIN_NAME like #{loginName,jdbcType=VARCHAR}
+			</if>
+			<if test="cond.realName != null" >
+		 	 		<bind name="realName" value="'%' + cond.realName + '%'" />
+		 	 	    and t1.REAL_NAME like #{realName,jdbcType=VARCHAR}
+			</if>
+			<if test="cond.nickName != null" >
+		 	 		<bind name="nickName" value="'%' + cond.nickName + '%'" />
+		 	 	    and t1.NICK_NAME like #{nickName,jdbcType=VARCHAR}
+			</if>
+			<if test="cond.roleId != null" >
+		 	 	    and t2.ROLE_ID = #{cond.roleId,jdbcType=DECIMAL}
+			</if>
+			<if test="cond.status != null" >
+		 	 	    and t1.STATUS = #{cond.status,jdbcType=CHAR}
+			</if>
+		</where>	
+		order by t1.staff_id ASC
+  </select>
+</mapper>

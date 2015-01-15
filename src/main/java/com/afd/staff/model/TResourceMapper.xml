@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiwang.staff.dao.TResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.yiwang.staff.model.TResource" >
+    <id column="resource_id" property="resourceId" jdbcType="INTEGER" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="perm_code" property="permCode" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="url_pattern" property="urlPattern" jdbcType="VARCHAR" />
+    <result column="display_order" property="displayOrder" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="classes" property="classes" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    resource_id, parent_id, perm_code, name, url, url_pattern, display_order, status, type, classes 
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yiwang.staff.model.TResourceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_resource
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_resource
+    where resource_id = #{resourceId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_resource
+    where resource_id = #{resourceId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yiwang.staff.model.TResourceExample" >
+    delete from t_resource
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yiwang.staff.model.TResource" >
+    <selectKey resultType="java.lang.Integer" keyProperty="resourceId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_resource (parent_id, perm_code, name, 
+      url, url_pattern, display_order, 
+      status, type, classes)
+    values (#{parentId,jdbcType=INTEGER}, #{permCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{urlPattern,jdbcType=VARCHAR}, #{displayOrder,jdbcType=INTEGER}, 
+      #{status,jdbcType=CHAR}, #{type,jdbcType=CHAR}, #{classes,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yiwang.staff.model.TResource" >
+    <selectKey resultType="java.lang.Integer" keyProperty="resourceId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_resource
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="permCode != null" >
+        perm_code,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="urlPattern != null" >
+        url_pattern,
+      </if>
+      <if test="displayOrder != null" >
+        display_order,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="classes != null" >
+        classes,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="permCode != null" >
+        #{permCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="urlPattern != null" >
+        #{urlPattern,jdbcType=VARCHAR},
+      </if>
+      <if test="displayOrder != null" >
+        #{displayOrder,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="classes != null" >
+        #{classes,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yiwang.staff.model.TResourceExample" resultType="java.lang.Integer" >
+    select count(*) from t_resource
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_resource
+    <set >
+      <if test="record.resourceId != null" >
+        resource_id = #{record.resourceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentId != null" >
+        parent_id = #{record.parentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.permCode != null" >
+        perm_code = #{record.permCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urlPattern != null" >
+        url_pattern = #{record.urlPattern,jdbcType=VARCHAR},
+      </if>
+      <if test="record.displayOrder != null" >
+        display_order = #{record.displayOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=CHAR},
+      </if>
+      <if test="record.classes != null" >
+        classes = #{record.classes,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_resource
+    set resource_id = #{record.resourceId,jdbcType=INTEGER},
+      parent_id = #{record.parentId,jdbcType=INTEGER},
+      perm_code = #{record.permCode,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      url_pattern = #{record.urlPattern,jdbcType=VARCHAR},
+      display_order = #{record.displayOrder,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=CHAR},
+      type = #{record.type,jdbcType=CHAR},
+      classes = #{record.classes,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yiwang.staff.model.TResource" >
+    update t_resource
+    <set >
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="permCode != null" >
+        perm_code = #{permCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="urlPattern != null" >
+        url_pattern = #{urlPattern,jdbcType=VARCHAR},
+      </if>
+      <if test="displayOrder != null" >
+        display_order = #{displayOrder,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="classes != null" >
+        classes = #{classes,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where resource_id = #{resourceId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yiwang.staff.model.TResource" >
+    update t_resource
+    set parent_id = #{parentId,jdbcType=INTEGER},
+      perm_code = #{permCode,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      url_pattern = #{urlPattern,jdbcType=VARCHAR},
+      display_order = #{displayOrder,jdbcType=INTEGER},
+      status = #{status,jdbcType=CHAR},
+      type = #{type,jdbcType=CHAR},
+      classes = #{classes,jdbcType=VARCHAR}
+    where resource_id = #{resourceId,jdbcType=INTEGER}
+  </update>
+</mapper>

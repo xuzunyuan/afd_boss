@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiwang.staff.dao.extend.TStaffPrivilegeMapper" >
+ <select id="selectStaffPrivelege" resultMap="com.yiwang.staff.dao.TResourceMapper.BaseResultMap" parameterType="java.lang.Integer" >
+    select distinct e.resource_id, e.parent_id, e.perm_code, e.name, 
+    	e.url, e.url_pattern, e.display_order, e.status, e.type
+	from t_staff a, t_staff_role b, t_role c, t_role_resource d, t_resource e
+	where a.staff_id = b.staff_id
+		and b.role_id = c.role_id
+		and c.role_id = d.role_id
+		and d.resource_id = e.resource_id
+		and a.staff_id = #{staffId}
+		and c.status = '1'
+		and e.status = '1'
+	order by e.display_order
+  </select>  
+</mapper>
