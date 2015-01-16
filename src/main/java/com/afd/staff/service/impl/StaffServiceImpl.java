@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.afd.common.config.AfdConfig;
 import com.afd.common.encrypt.MD5Encrypt;
-import com.afd.common.encrypt.UUIDGenerator;
+import com.afd.common.generator.UUIDGenerator;
 import com.afd.common.mybatis.Page;
 import com.afd.staff.dao.TRoleMapper;
 import com.afd.staff.dao.TStaffMapper;
