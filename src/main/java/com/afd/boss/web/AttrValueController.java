@@ -3,7 +3,6 @@ package com.afd.boss.web;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
@@ -43,7 +42,7 @@ import com.google.common.collect.Maps;
 public class AttrValueController {
 	protected final static Logger logger = LoggerFactory.getLogger(AttrValueController.class);
 	
-	@Resource(name="dubbo_categoryService")
+	@Autowired
 	private ICategoryService cateogryService;
 	
 	@Autowired

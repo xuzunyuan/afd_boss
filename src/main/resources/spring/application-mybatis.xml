@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">	
+	
+	<!-- 创建SqlSessionFactory，同时指定数据源 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource_staff" />
+		<property name="configLocation" value="classpath:spring/mybatis.xml" />
+		<property name="typeAliasesPackage" value="com.afd.staff.model" />
+		<property name="mapperLocations" value="classpath*:com/afd/staff/model/**/*Mapper.xml" />
+		<property name="plugins">
+			<array>
+				<ref bean="pagePlugin"/>  
+			</array>
+		</property>
+	</bean>
+
+	<bean class="com.afd.common.mybatis.PageInterceptor" id="pagePlugin"/>
+	
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"> 
+      <constructor-arg ref="sqlSessionFactory" />
+    </bean> 
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" p:basePackage="com.afd.staff.dao" p:sqlSessionTemplateBeanName="sqlSessionTemplate" />
+		
+</beans>

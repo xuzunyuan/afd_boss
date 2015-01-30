@@ -1,0 +1,65 @@
+/**
+ * Reset CSS v1.0
+ * ahtuor:ZhangHaiBin
+ * date:2014-4-18;
+ * Do not include the old tags
+ */
+body,
+h1,h2,h3,h4,h5,h6,
+dl,dd,ul,ol,th,td,menu,
+p,pre,blockquote,
+form,fieldset,legend,
+input,button,select,textarea,
+figure,keygen{
+	margin:0;
+	padding:0;
+}
+h1,h2,h3,h4,h5,h6{
+	font-size:100%;
+}
+ol,ul{
+	list-style:none;
+}
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+button,input,select,textarea{
+	font-family:inherit;
+	font-size:100%;
+	font-weight:inherit;
+}
+abbr,fieldset,img{
+	border:0;
+}
+abbr[title]{
+	border-bottom: 1px dotted;
+}
+address,em,i{
+	font-style:normal;
+}
+img{
+	vertical-align:top;
+}
+q:before,q:after{
+	content:'';
+}
+sup {
+	vertical-align:text-top;
+}
+sub {
+	vertical-align:text-bottom;
+}
+
+/* HTML 5 */
+article,aside,details,figcaption,figure,footer,
+header,hgroup,menu,main,nav,section,summary{
+	display:block;
+}
+
+/* can modify properties */
+textarea{
+	overflow-y:auto;
+	vertical-align:top;
+	resize:none;
+}

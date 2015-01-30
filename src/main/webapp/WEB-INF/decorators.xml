@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/WEB-INF/views/workstation/">
+	<decorator name="main" page="main.jsp">
+		<pattern>/*</pattern>
+	</decorator>
+	<excludes>
+        <pattern>/login</pattern>
+        <pattern>/logout</pattern>
+        <pattern>/order/cartContent*</pattern>
+        <pattern>/order/prodList*</pattern>
+        <pattern>/store/listStore</pattern>
+        <pattern>/ywProdPromotion/selectSku*</pattern>
+        <pattern>/cateattr/attrlist*</pattern>
+        <pattern>/catespec/selectSpecs*</pattern>
+    </excludes>
+</decorators>

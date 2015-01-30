@@ -5,8 +5,19 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     
-    <!-- Uncomment and add your base-package here:
-         <context:component-scan
-            base-package="org.springframework.samples.service"/>  -->
+    <context:property-placeholder location="classpath:properties/*.properties"/>
+	
+	<!-- 自动扫描且只扫描@Repository -->
+	<context:component-scan base-package="com.afd.staff.dao" use-default-filters="false" >
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
+	</context:component-scan>
+	
+	<!-- 自动扫描且只扫描@Service -->
+	<context:component-scan base-package="com.afd.staff.service,com.afd.boss.service" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
+	</context:component-scan>
 
+   <!-- 获取spring管理的bean工具类 -->
+	<bean class="com.afd.common.spring.SpringContextUtil"/>
+	
 </beans>

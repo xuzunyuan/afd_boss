@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="  
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd 
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd  
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+ 	 http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+    ">
+
+	<!-- 配置事务 -->
+	<bean id="transactionManager_staff" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="dataSource_staff" />
+
+	<tx:advice id="txAdvice_staff" transaction-manager="transactionManager_staff">  
+       <tx:attributes>  
+       	   <tx:method name="insert*" propagation="REQUIRED" read-only="false" rollback-for="Throwable"/>  
+       	   <tx:method name="update*" propagation="REQUIRED" read-only="false" rollback-for="Throwable"/> 
+       	   <tx:method name="save*" propagation="REQUIRED" read-only="false" rollback-for="Throwable"/> 
+       	   <tx:method name="new*" propagation="REQUIRED" read-only="false" rollback-for="Throwable"/> 
+       	   <tx:method name="del*" propagation="REQUIRED" read-only="false" rollback-for="Throwable"/>  
+           <tx:method name="*" propagation="SUPPORTS" rollback-for="Throwable"/>  
+       </tx:attributes>  
+   </tx:advice>  
+
+   <aop:config proxy-target-class="true">  
+       <aop:pointcut id="interceptorPointCuts_staff" expression="execution(* com.afd.staff.service.impl.*.*(..))" />  
+       <aop:advisor advice-ref="txAdvice_staff" pointcut-ref="interceptorPointCuts_staff" />          
+   </aop:config>  
+	
+	<bean id="druid-stat-interceptor" class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor" />
+	<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut" scope="prototype">
+	    <property name="patterns">
+	        <list>
+	            <value>com.afd.staff.service.impl.*</value>
+	        </list>
+	    </property>
+	</bean>
+	<aop:config>
+	    <aop:advisor advice-ref="druid-stat-interceptor" pointcut-ref="druid-stat-pointcut" />
+	</aop:config>
+</beans>

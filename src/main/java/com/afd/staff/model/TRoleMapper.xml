@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.yiwang.staff.dao.TRoleMapper" >
-  <resultMap id="BaseResultMap" type="com.yiwang.staff.model.TRole" >
+<mapper namespace="com.afd.staff.dao.TRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.afd.staff.model.TRole" >
     <id column="role_id" property="roleId" jdbcType="INTEGER" />
     <result column="role_code" property="roleCode" jdbcType="VARCHAR" />
     <result column="role_name" property="roleName" jdbcType="VARCHAR" />
@@ -70,7 +70,7 @@
   <sql id="Base_Column_List" >
     role_id, role_code, role_name, remark, status, type
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yiwang.staff.model.TRoleExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.afd.staff.model.TRoleExample" >
     select
     <if test="distinct" >
       distinct
@@ -94,13 +94,13 @@
     delete from t_role
     where role_id = #{roleId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.yiwang.staff.model.TRoleExample" >
+  <delete id="deleteByExample" parameterType="com.afd.staff.model.TRoleExample" >
     delete from t_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.yiwang.staff.model.TRole" >
+  <insert id="insert" parameterType="com.afd.staff.model.TRole" >
     <selectKey resultType="java.lang.Integer" keyProperty="roleId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -109,7 +109,7 @@
     values (#{roleCode,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
       #{status,jdbcType=CHAR}, #{type,jdbcType=CHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.yiwang.staff.model.TRole" >
+  <insert id="insertSelective" parameterType="com.afd.staff.model.TRole" >
     <selectKey resultType="java.lang.Integer" keyProperty="roleId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -149,7 +149,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.yiwang.staff.model.TRoleExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.afd.staff.model.TRoleExample" resultType="java.lang.Integer" >
     select count(*) from t_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -193,7 +193,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.yiwang.staff.model.TRole" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.afd.staff.model.TRole" >
     update t_role
     <set >
       <if test="roleCode != null" >
@@ -214,7 +214,7 @@
     </set>
     where role_id = #{roleId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.yiwang.staff.model.TRole" >
+  <update id="updateByPrimaryKey" parameterType="com.afd.staff.model.TRole" >
     update t_role
     set role_code = #{roleCode,jdbcType=VARCHAR},
       role_name = #{roleName,jdbcType=VARCHAR},

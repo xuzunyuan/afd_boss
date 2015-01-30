@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
@@ -36,7 +35,7 @@ import com.afd.staff.model.TStaff;
 public class SpecController {
 	protected final static Logger logger = LoggerFactory.getLogger(SpecController.class);
 	
-	@Resource(name="dubbo_specService")
+	@Autowired
 	private ICategoryService cateogryService;
 	
 	@Autowired
