@@ -768,12 +768,12 @@ textarea{
 	height:25px;
 }
 .c-m-ul .c-m-w2 {
-	width:120px;
+	width:180px;
 	text-align:center;
 }
 .c-m-ul .c-m-w3,
 .c-m-ul .c-m-w3-1{
-	width:160px;
+	width:350px;
 	text-align:center;
 }
 .c-m-ul .c-m-w3 select,
@@ -2130,7 +2130,12 @@ a:hover{text-decoration:underline;}
 #footer .copyright {
 	font-family: arial;
 }
-
+.main {
+position: relative;
+float: right;
+width: 1020px;
+min-height: 630px;
+}
 
 
 

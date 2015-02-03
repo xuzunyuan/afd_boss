@@ -813,7 +813,7 @@ textarea{
 }
 .header h1 a {
 	float:left;
-	display:block;
+	display:none;
 	width:340px;
 	height:47px;
 	margin:10px 5px 0 0;
@@ -822,7 +822,7 @@ textarea{
 }
 .header h1 span {
 	float:left;
-	display:none;
+	display:block;
 	height:40px;
 	margin-top:18px;
 	color:#FFFFFF;
