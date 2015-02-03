@@ -17,15 +17,6 @@
 		<!-- foldbarV -->
 		<div id="foldbarV"><div class="foldbarV"><div class="foldBtn"></div></div></div>
 		<!-- foldbarV end -->
-		<!-- crumbs -->
-		<div class="crumbs crumbsA">
-			<ul>
-				<li><a href="#">后台首页</a><em>&gt;</em></li>
-				<li><a href="#">属性管理</a><em>&gt;</em></li>
-				<li><strong>添加属性值</strong></li>
-			</ul>
-		</div>
-		<!-- crumbs end -->
 		<!-- addTemplate -->
 		<div class="addnewName">
 			<div class="hintBar">
@@ -89,10 +80,7 @@
 		$(function() {
 			var re = "${re}";
 			if(re == 1){
-				$.modaldialog('<p><span>•</span>保存成功！</p>',{
-					title : '提醒',
-					buttons : [{text:'确&nbsp;&nbsp;定',classes:'btnB btn-s'}]
-				}); 
+				$.modaldialog('<p><span>•</span>保存成功！</p>',{title : '提醒'}); 
 			}
 			
 			$("#attrValueName").blur(function(){

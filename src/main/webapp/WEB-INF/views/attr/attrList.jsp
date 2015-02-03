@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@include file="/common/common.jsp"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -11,8 +10,8 @@
 <title>BOSS后台|属性名列表页</title>
 </head>
 <body>
-	<script type="text/javascript" src="../static/js/page.js?t=2014061701"></script>
-	<script type="text/javascript" src="../static/js/jquery.md.js?t=2014102001"></script>
+	<script type="text/javascript" src="../static/js/page.js?t=2015020201"></script>
+	<script type="text/javascript" src="../static/js/jquery.md.js?t=2015020201"></script>
 	
 	<!-- main -->
 	<div class="main">
@@ -23,15 +22,6 @@
 			</div>
 		</div>
 		<!-- foldbarV end -->
-		<!-- crumbs -->
-		<div class="crumbs">
-			<ul>
-				<li><a href="#">后台首页</a><em>&gt;</em></li>
-				<li><a href="/attr/list">属性管理</a><em>&gt;</em></li>
-				<li><strong>属性名列表</strong></li>
-			</ul>
-		</div>
-		<!-- crumbs end -->
 		<!-- goodsList -->
 		<div class="managevalueList">
 			<!-- screening -->

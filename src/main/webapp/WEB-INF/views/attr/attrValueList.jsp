@@ -23,15 +23,6 @@
 			</div>
 		</div>
 		<!-- foldbarV end -->
-		<!-- crumbs -->
-		<div class="crumbs">
-			<ul>
-				<li><a href="#">后台首页</a><em>&gt;</em></li>
-				<li><a href="/attrvalue/list">属性管理</a><em>&gt;</em></li>
-				<li><strong>属性值列表</strong></li>
-			</ul>
-		</div>
-		<!-- crumbs end -->
 		<!-- goodsList -->
 		<div class="managevalueList">
 			<!-- screening -->

@@ -20,15 +20,6 @@
 				<!-- foldbarV -->
 				<div id="foldbarV"><div class="foldbarV"><div class="foldBtn"></div></div></div>
 				<!-- foldbarV end -->
-				<!-- crumbs -->
-				<div class="crumbs crumbsA">
-					<ul>
-						<li><a href="#">后台首页</a><em>&gt;</em></li>
-						<li><a href="#">属性管理</a><em>&gt;</em></li>
-						<li><strong>类目属性关联</strong></li>
-					</ul>
-				</div>
-				<!-- crumbs end -->
 				<!-- propertyMain -->
 				<div class="propertyMain">
 					<div class="hintBar">

@@ -109,6 +109,7 @@ private TResource getFolder(int folderId, List<TResource> allFolder) {
 <script type="text/javascript" src="<%= request.getContextPath() %>/static/js/jquery-1.10.2.min.js?t=2014051601"></script>
 <script type="text/javascript" src="<%= request.getContextPath() %>/static/js/jquery.cookie.js?t=2014051601"></script>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/static/style/classes.css?t=2015013001" />
+<link rel="stylesheet" href="<%= request.getContextPath() %>/static/style/all-debug.css?t=2015013001" />
 <title><decorator:title default="一网全城BOSS管理系统"/></title>
 <script type="text/javascript">
 $().ready(function(){

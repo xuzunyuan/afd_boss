@@ -5,7 +5,7 @@
 		<title>选择规格名</title>
 	</head>
 	<body>
-		<link rel="stylesheet" href="${ctx}/static/style/classes_.css?t=20141025" />
+		<link rel="stylesheet" href="<%= request.getContextPath() %>/static/style/all-debug.css?t=2015013001" />
 		<script type="text/javascript" src="<%= request.getContextPath() %>/static/js/jquery-1.10.2.min.js"></script>
 		<script type="text/javascript" src="<%= request.getContextPath() %>/static/js/jquery.cookie.js"></script>
 		<script type="text/javascript">

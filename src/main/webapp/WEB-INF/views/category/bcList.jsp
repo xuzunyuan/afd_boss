@@ -10,10 +10,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<title>基础类目管理-一网全城</title>
+<title>基础类目管理-阿凡达</title>
 </head>
 <body>
-	<div class="crumbs-box">
+	<!--<div class="crumbs-box">
         <div class="crumbs">
             <h3>当前位置 &#58;</h3>
             <ul>
@@ -22,7 +22,7 @@
                 <li>基础类目管理</li>
             </ul>
         </div>
-    </div><!--crumbs-box end-->
+    </div>crumbs-box end-->
     <div class="category-main">
     	<div class="category-main-left">
         	<input id="add_first" type="button" class="inputBtn" value="添加一级类目" >
@@ -32,7 +32,7 @@
         </div> -->
         <div id="0" class="clearfix"></div>
         <c:if test="${not empty(bcList)}">
-    	<ul class="boos-ul c-m-ul c-m-ul1">
+    	<ul class="boos-ul c-m-ul">
         	<li class="boos-ul-th">
             	<div class="boos-ul-td c-m-w1">分类名称</div>
             	<div class="boos-ul-td c-m-w2">显示顺序</div>
@@ -87,10 +87,8 @@
 
 	<div id="mask_bg"></div>
 	<div id="add_show" style="display: none">
-		<h2>
-			增加类目名称<a href="javascript:void(0);" title="关闭">关闭</a>
-		</h2>
 		<form id="addForm" action="">
+			<h2>增加类目名称<a href="javascript:void(0);" title="关闭">关闭</a></h2>
 			<ul class="mask-form-list">
 				<li>
 					<div class="m-f-l-left">类目名称：</div>
@@ -113,9 +111,7 @@
 	</div>
 	<div id="update_show" style="display: none">
 		<form id="updateForm" action="">
-			<h2>
-				修改类目名称<a href="javascript:void(0);" title="关闭">关闭</a>
-			</h2>
+			<h2>修改类目名称<a href="javascript:void(0);" title="关闭">关闭</a></h2>
 			<ul class="mask-form-list">
 				<li>
 					<div class="m-f-l-left">原类目名称：</div>

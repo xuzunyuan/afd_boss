@@ -8,7 +8,7 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
 <script type="text/javascript" src="<%= request.getContextPath() %>/static/js/jquery-1.10.2.min.js?t=2014051601"></script>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/static/style/classes_.css?t=201410201500" />
+<link rel="stylesheet" href="<%= request.getContextPath() %>/static/style/all-debug.css?t=2015013001" />
 <title>选择关联属性</title>
 </head>
 <body>

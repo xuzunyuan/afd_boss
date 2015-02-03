@@ -5,7 +5,6 @@
 		<title>规格名列表页</title>
 	</head>
 	<body>
-		<link rel="stylesheet" href="${ctx}/static/style/classes_.css?t=20141022" />
 		<script type="text/javascript" src="../static/js/jquery.md.js?t=20141022"></script>
 		
 		<script type="text/javascript">
@@ -54,15 +53,6 @@
 		<!-- foldbarV -->
 		<div id="foldbarV"><div class="foldbarV"><div class="foldBtn"></div></div></div>
 		<!-- foldbarV end -->
-		<!-- crumbs -->
-		<div class="crumbs">
-			<ul>
-				<li><a href="#">后台首页</a><em>&gt;</em></li>
-				<li><a href="#">规格管理</a><em>&gt;</em></li>
-				<li><strong>规格名列表</strong></li>
-			</ul>
-		</div>
-		<!-- crumbs end -->
 		<!-- normsList -->
 		<div class="normsList">
 			<!-- screening -->
