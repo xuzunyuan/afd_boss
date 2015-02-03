@@ -77,7 +77,7 @@ private TResource getFolder(int folderId, List<TResource> allFolder) {
 	// 计算menu长度
 	int length = 0, selectedFolder = 0;
 	String m = (String)request.getSession().getAttribute("m");
-	
+
 	if(menu != null) {
 		length += menu.size();
 		
@@ -96,6 +96,8 @@ private TResource getFolder(int folderId, List<TResource> allFolder) {
 	}
 	
 	if(length > 15) request.setAttribute("bigMenu", true);
+	if("-101".equals(m) || "-102".equals(m)) selectedFolder = -100;
+	
 	if(selectedFolder != 0) request.setAttribute("selectedFolder", selectedFolder);
 %>
    
@@ -105,18 +107,16 @@ private TResource getFolder(int folderId, List<TResource> allFolder) {
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<script type="text/javascript" src="<%= request.getContextPath() %>/static/js/jquery-1.10.2.min.js?t=2014051601"></script>
-<script type="text/javascript" src="<%= request.getContextPath() %>/static/js/jquery.cookie.js?t=2014051601"></script>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/static/style/classes.css?t=2015013001" />
-<link rel="stylesheet" href="<%= request.getContextPath() %>/static/style/all-debug.css?t=2015013001" />
+<script type="text/javascript" src="<%= request.getContextPath() %>/static/js/jquery-1.10.2.min.js?t=20150203"></script>
+<script type="text/javascript" src="<%= request.getContextPath() %>/static/js/jquery.cookie.js?t=20150203"></script>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/static/style/classes.css?t=20150203" />
+<link rel="stylesheet" href="<%= request.getContextPath() %>/static/style/all-debug.css?t=20150203" />
 <title><decorator:title default="阿凡达BOSS管理系统"/></title>
 <script type="text/javascript">
 $().ready(function(){
 	var folder = $('h3[folderId]'), menu = $('a[menuId]');
 	folder.click(clickFolder);	
 	menu.click(clickMenu);
-	
-	//initMenu();
 });
 
 function clickFolder(e) {
@@ -200,8 +200,8 @@ function initMenu() {
 								</ul>
 							</c:forEach>
 							
-							<h3 folderId="-100" class="contNumber"><i class="ico"></i>我的账号<i class="arrow ${(empty(requestScope.selectedFolder) || empty(requestScope.bigMenu)) ? 'arrA-D' : 'arrA-R'}"></i></h3>
-							<ul folderId="-100" style="${(empty(requestScope.selectedFolder) || empty(requestScope.bigMenu)) ? '' : 'display:none'}">									
+							<h3 folderId="-100" class="contNumber"><i class="ico"></i>我的账号<i class="arrow ${(requestScope.selectedFolder == -100 || empty(requestScope.bigMenu)) ? 'arrA-D' : 'arrA-R'}"></i></h3>
+							<ul folderId="-100" style="${(requestScope.selectedFolder == -100 || empty(requestScope.bigMenu)) ? '' : 'display:none'}">									
 								<li menuId="-101" folderId="-100"><a href="<%= request.getContextPath() %>/myAccount/view" menuId="-101" ${'-101' == sessionScope.m ? 'class="on"' : ''}>我的资料</a></li>
 								<li menuId="-102" folderId="-100"><a href="<%= request.getContextPath() %>/myPassword/view" menuId="-102" ${'-102' == sessionScope.m ? 'class="on"' : ''}>修改密码</a></li>
 							</ul>
