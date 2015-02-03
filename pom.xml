@@ -14,20 +14,11 @@
 	</parent>
 	
 	<dependencies>
-		<!-- mysql begin -->
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysql-connector.version}</version>
-		</dependency>
-		<!-- mysql end -->
-		
-		<!-- c3p0 begin -->
-		<dependency>
-			<groupId>com.mchange</groupId>
-			<artifactId>c3p0</artifactId>
-		</dependency>
-		<!-- c3p0 end -->
+			<groupId>com.afd.service</groupId>
+			<artifactId>afd_service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>		
 		
 		<!-- shiro begin -->
 		<dependency>
@@ -66,60 +57,5 @@
 		</dependency>
 		<!-- sitemesh end -->
 		
-	</dependencies>
-	
-	<build>
-		<defaultGoal>compile</defaultGoal>
-		<finalName>afd_boss</finalName>
-		<resources>
-			<resource>
-				<directory>${project.basedir}/src/main/java</directory>
-				<filtering>true</filtering>
-				<includes>
-					<include>**/*.xml</include>
-					<include>**/*.properties</include>
-				</includes>
-			</resource>
-			<resource>
-				<directory>${project.basedir}/src/main/resources</directory>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
-		
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<defaultLibBundleDir>lib</defaultLibBundleDir>
-					<source>1.7</source>
-					<target>1.7</target>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<skip>true</skip>
-					<testFailureIgnore>true</testFailureIgnore>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<configuration>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.2</version>
-			</plugin>  
-		</plugins>
-	</build>
+	</dependencies>	
 </project>
