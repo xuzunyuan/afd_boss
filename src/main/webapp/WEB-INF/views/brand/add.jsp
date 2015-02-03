@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<title>品牌增加-一网全城</title>
+<title>品牌增加-afd</title>
 </head>
 <body>
 	<script type="text/javascript" src="../static/js/jquery.md.js?t=2014071601"></script>
@@ -340,7 +340,7 @@
 				buttonClass : 'uploadBtn',
 				buttonText : '上 传',
 				swf	:	'../static/js/uploadify/uploadify.swf',
-				uploader : 'http://upload.yiwangimg.com/rc/upload',
+				uploader : '${imgUploadUrl}',
 				height :	20, 
 				width  :	50,
 				fileSizeLimit : '100KB',
@@ -357,7 +357,7 @@
 				onUploadSuccess : function(file, data, response) {
 					if(response) {
 						var d = $.parseJSON(data);
-						var url = "${imgDownDomain}"+d.rid;
+						var url = "${my:random(imgGetUrl)}"+d.rid;
 						$('#logoImg').attr('src', url);
 						$('#logoUrl').val(d.rid);
 					}
