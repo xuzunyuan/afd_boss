@@ -55,6 +55,7 @@ public class StaticCacheHolder {
 	 * @param cacheKey
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public <T> T getCache(String cacheKey) {
 		return (T) cacheHolder.get(cacheKey);
 	}

@@ -19,6 +19,7 @@ import com.google.common.collect.Maps;
 public class PageUtils {
 	private static final String SESSION_PAGE_KEY = "SESSION_PAGE_KEY";
 
+	@SuppressWarnings("unchecked")
 	public static final PageInfo registerPageInfo(HttpServletRequest request) {
 		PageInfo pageInfo = new PageInfo();
 
