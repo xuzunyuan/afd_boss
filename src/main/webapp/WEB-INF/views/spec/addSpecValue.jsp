@@ -104,7 +104,7 @@
 					buttonClass : 'btn upload',
 					buttonText : '上传图片',
 					swf	:	'../static/js/uploadify/uploadify.swf',
-					uploader : 'http://upload.yiwangimg.com/rc/upload',
+					uploader : '${imgUploadUrl}',
 					height :	25, 
 					width  :	75,
 					fileSizeLimit : '100KB',
@@ -121,7 +121,7 @@
 					onUploadSuccess : function(file, data, response) {
 						if(response) {
 							var d = $.parseJSON(data);
-							var url = "${imgDownDomain}"+d.rid;
+							var url = "${my:random(imgGetUrl)}"+d.rid;
 							$("#img").attr("src",url);
 							$("img").attr("rid",d.rid);
 						}

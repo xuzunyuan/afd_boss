@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<title>修改品牌-一网全城</title>
+<title>修改品牌-afd</title>
 </head>
 <body>
 	<script type="text/javascript" src="../static/js/uploadify/jquery.uploadify.min.js?t=2014071601"></script>
@@ -151,7 +151,7 @@
 												<img id="logoImg" src="../static/img/bramLogo.jpg" alt="" >
 											</c:when>
 											<c:otherwise>
-												<img id="logoImg" src="${imgDownDomain}${brand.logoUrl}&op=s1_w400_h200_e1-c3_w400_h200" alt="" >
+												<img id="logoImg" src="${my:random(imgGetUrl)}${brand.logoUrl}&op=s1_w400_h200_e1-c3_w400_h200" alt="" >
 											</c:otherwise>
 										</c:choose>
 										<input type="button" class="btn" value="浏览" id="brandLogo" >
@@ -312,7 +312,7 @@
 				buttonClass : 'uploadBtn',
 				buttonText : '上 传',
 				swf	:	'../static/js/uploadify/uploadify.swf',
-				uploader : 'http://upload.yiwangimg.com/rc/upload',
+				uploader : '${imgUploadUrl}',
 				height :	20, 
 				width  :	50,
 				fileSizeLimit : '100KB',
@@ -329,7 +329,7 @@
 				onUploadSuccess : function(file, data, response) {
 					if(response) {
 						var d = $.parseJSON(data);
-						var url = "${imgDownDomain}"+d.rid;
+						var url = "${my:random(imgGetUrl)}"+d.rid;
 						$('#logoImg').attr('src', url);
 						$('#logoUrl').val(d.rid);
 					}
