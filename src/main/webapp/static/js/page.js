@@ -1,12 +1,11 @@
 $(function(){
+	CheckUtil.limitDigital($('.num'));
+	
 	$('.num').keydown(function(event){
-		return (event.which == 8 ||
-				event.which == 9 ||
-				event.which == 46 ||				
-				(event.which >= 48 && event.which <= 57) ||
-				(event.which >= 37 && event.which <= 40) ||
-				(event.which >= 96 && event.which <= 105));
-	});
+		if(event.which == 13) {
+			$(':button[action]').trigger('click');
+		}		
+	});	
 	
 	$(':button[action]').click(function(){
 		var action = $(this).attr('action');

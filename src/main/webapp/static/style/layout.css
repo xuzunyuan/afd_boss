@@ -143,14 +143,18 @@
 .i-errors{
 	background-position: -50px -240px;
 }
-
+/*33*33*/
+.i-lamp{
+	width: 25px;
+	height: 25px;
+	background-position: -112px -187px;
+}
 /* 42*42 */
 .i-exclaim{
 	width:42px;
 	height:42px;
 	background-position:-81px -20px;
 }
-
 /*45*14*/
 .i-switch{
 	width:45px;
@@ -1208,6 +1212,12 @@
 }
 .hintBar li em{
 	font:12px/20px "simsun";
+}
+.hintBar-lamp{
+	padding: 5px 25px;
+}
+.hintBar-lamp li{
+	line-height: 25px;
 }
 /* checkHint */
 .hintTxt{

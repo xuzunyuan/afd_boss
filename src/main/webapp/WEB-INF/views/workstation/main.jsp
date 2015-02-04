@@ -107,8 +107,7 @@ private TResource getFolder(int folderId, List<TResource> allFolder) {
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<script type="text/javascript" src="<%= request.getContextPath() %>/static/js/jquery-1.10.2.min.js?t=20150203"></script>
-<script type="text/javascript" src="<%= request.getContextPath() %>/static/js/jquery.cookie.js?t=20150203"></script>
+<script type="text/javascript" src="<%= request.getContextPath() %>/static/js/g.js?t=20150203"></script>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/static/style/classes.css?t=20150203" />
 <link rel="stylesheet" href="<%= request.getContextPath() %>/static/style/all-debug.css?t=20150203" />
 <title><decorator:title default="阿凡达BOSS管理系统"/></title>
