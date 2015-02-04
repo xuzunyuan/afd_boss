@@ -73,7 +73,7 @@
 								if(data.imgUrl.substring(0,5) == "http:"){
 									trNode.find("td[name=img]").append("<img src='" + data.imgUrl + "' width='13' height='13' class='colorBlock'>");
 								}else{
-									trNode.find("td[name=img]").append("<img src='${imgDownDomain}" + data.imgUrl + "' width='13' height='13' class='colorBlock'>");
+									trNode.find("td[name=img]").append("<img src='${my:random(imgGetUrl)}" + data.imgUrl + "' width='13' height='13' class='colorBlock'>");
 								}
 							}else{
 								trNode.find("td[name=img]").append("<input id='" + data.specValueId + "' type='button' name='upload' specValueId='" + data.specValueId + "' class='btn' value='上传图片'>");
@@ -182,6 +182,7 @@
 				$("input[name=upload]").each(function(){
 					var specValueId = $(this).attr("specValueId");
 					var parentNode = $(this).parent();
+					 
 					$(this).uploadify({
 						auto	: true,
 						multi	: false,
@@ -189,7 +190,7 @@
 						buttonClass : 'btn upload',
 						buttonText : '上传图片',
 						swf	:	'../static/js/uploadify/uploadify.swf',
-						uploader : 'http://upload.yiwangimg.com/rc/upload',
+						uploader : '${imgUploadUrl}',
 						height :	25, 
 						width  :	75,
 						fileSizeLimit : '100KB',
@@ -206,9 +207,10 @@
 						onUploadSuccess : function(file, data, response) {
 							if(response) {
 								var d = $.parseJSON(data);
-								var url = "${imgDownDomain}"+d.rid;
+								var img = "<img src='${my:random(imgGetUrl)}" + d.rid + "' width='13' height='13' class='colorBlock'>";
+								 
 								parentNode.empty();
-								parentNode.append("<img src=" + url + " width='13' height='13' class='colorBlock'>");
+								parentNode.append(img);
 								saveImgUrl(specValueId, d.rid);
 							}
 						},
@@ -356,7 +358,7 @@
 																		<img src="${specSpecValue.imgUrl}"  width="13" height="13" class="colorBlock hidden">
 																	</c:when>
 																	<c:otherwise>
-																		<img src="${imgDownDomain}${specSpecValue.imgUrl}"  width="13" height="13" class="colorBlock hidden">
+																		<img src="${my:random(imgGetUrl)}${specSpecValue.imgUrl}"  width="13" height="13" class="colorBlock hidden">
 																	</c:otherwise>
 																</c:choose>
 															</c:when>
