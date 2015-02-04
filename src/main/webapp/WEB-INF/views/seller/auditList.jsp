@@ -114,7 +114,7 @@
 							<td>待审核</td>
 							<td class="t-operate">
 								<div class="mod-operate">
-								<div class="def"><a href="#">审核申请</a><i class="arr"></i></div>
+								<div class="def"><a href="${ctx }/seller/auditPage?appId=${apply.appId}">审核申请</a><i class="arr"></i></div>
 									<ul></ul>
 								</div>
 							</td>
