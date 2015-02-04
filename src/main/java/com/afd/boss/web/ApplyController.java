@@ -39,7 +39,7 @@ import com.google.common.collect.Maps;
  * @date 2014年1月16日
  */
 @Controller
-public class SellerController {
+public class ApplyController {
 	@Autowired
 	ISellerApplyService applyService;
 
