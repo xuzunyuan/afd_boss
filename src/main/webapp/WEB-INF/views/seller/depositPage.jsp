@@ -26,7 +26,7 @@
 					</dd>
 				</dl>
 			</div>
-			
+			<form class="form formA">	
 				<fieldset>
 					<div class="mod-info">
 						<div class="item">
@@ -266,7 +266,7 @@
 					</c:if>
 					<input type="button" class="btn" value="取消" onclick="javascript:location.href='${ctx}/seller/deposit';">	
 				</div>
-
+			</form>
 			<c:if test="${!empty(audits)}">
 			<table class="table tableC">
 				<colgroup>
