@@ -31,6 +31,8 @@ import com.afd.common.util.PropertyUtils;
 public class HttpCilient {
 	public static final Logger LOGGER = LoggerFactory.getLogger(HttpCilient.class);
 	
+	private static final String IMG_UPLOAD_ADDR =(String)PropertyUtils.getProperty("imgUploadUrl");
+	
 	public static List<String> uploadFileService(InputStream inputStream, String fileName, String opt) throws Exception {
 		List<String> list = new ArrayList<String>();
 		HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
@@ -39,7 +41,7 @@ public class HttpCilient {
 		
 		String jsonStr = null;
 		HttpResponse response = null;
-		HttpPost httpPost = new HttpPost(PropertyUtils.getRandomProperty("imgUploadUrl").toString());
+		HttpPost httpPost = new HttpPost(IMG_UPLOAD_ADDR);
 		httpPost.setConfig(RequestConfig.DEFAULT);
 	
 		try {
