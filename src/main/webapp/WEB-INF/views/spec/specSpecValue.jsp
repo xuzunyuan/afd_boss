@@ -209,8 +209,9 @@
 								var d = $.parseJSON(data);
 								var img = "<img src='${my:random(imgGetUrl)}" + d.rid + "' width='13' height='13' class='colorBlock'>";
 								 
-								parentNode.empty();
+								parentNode.children().detach();
 								parentNode.append(img);
+								
 								saveImgUrl(specValueId, d.rid);
 							}
 						},

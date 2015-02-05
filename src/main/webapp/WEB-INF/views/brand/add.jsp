@@ -48,15 +48,6 @@
 			</div>
 		</div>
 		<!-- foldbarV end -->
-		<!-- crumbs -->
-		<div class="crumbs crumbsA">
-			<ul>
-				<li><a href="#">后台首页</a><em>&gt;</em></li>
-				<li><a href="${ctx}/brand/list?m=33">品牌管理</a><em>&gt;</em></li>
-				<li><strong>添加品牌</strong></li>
-			</ul>
-		</div>
-		<!-- crumbs end -->
 		<!-- relateType -->
 		<div class="relateType result">
 			<div class="hintBar">
@@ -67,9 +58,8 @@
 					<dd>
 						<h4>请注意：</h4>
 						<ul>
-							<li><em>·</em>添加品牌时可以同时对多个基础类目进行添加</li>
-							<li><em>·</em>中文品牌名称和英文品牌名称至少填写一项，同一个三级类目下面，品牌名称不能重复；拼音码填写的是中文品牌名全拼，如果没有中文品牌则填写英文品牌，字母全部小写。</li>
-							<li><em>·</em>品牌Logo须与商标注册图文信息一致，尺寸400X200像素，格式jpg，大小不超过100K</li>
+							<li><em>·</em>品牌名称不能重复；品牌全拼是自动生成项，为中文品牌全拼，如果没有中文品牌则显示英文品牌。</li>
+							<li><em>·</em>品牌Logo许与商标注册图文信息一致，尺寸400X200像素，格式jpg，大小不超过100K</li>
 						</ul>
 					</dd>
 				</dl>
@@ -82,7 +72,7 @@
 				<div class="legend">
 					<div class="legend-meg">
 						<span>品牌输入规则</span>
-						<div class="mod-help">
+						<div class="mod-help mod-helps">
 							<i class="ico"></i>
 							<div class="text">
 								<div class="text-meg">
@@ -91,48 +81,12 @@
 									<p>2.对于没有明确官方描述的英文名称，品牌采用每个单词首字母大写，单词的其他字母小写方式录入；</p>
 									<p>3.英文品牌所有字符（含非字母字符）皆须是在英文半角状态下输入的字符，不能出现在中文状态下的或全角字符状态下输入的字符；</p>
 									<p>4.同一个品牌有且只有一个品牌名称，即官方发布的品牌；</p>
-									<p>5.至少填写一个中或英文品牌，同一个三级类目下品牌不可重复</p>
 								</div>
 							</div>
 						</div>
 					</div>
 					<h3>添加品牌</h3>
 				</div>
-				<fieldset>
-					<dl class="item">
-						<dt class="item-label">
-							<label><em>*</em>类目选择：</label>
-						</dt>
-						<dd class="item-cont">
-							<input type="button" class="btn" value="+ 添加基础类目" onclick="selCateClick()">
-							<input type="hidden" class="btn" id="bcIds" name="bcIds">
-							<input type="hidden" class="btn" id="bcShows" name="bcShows">
-							<table class="table tableD">
-								<colgroup>
-									<col width="180">
-									<col width="180">
-									<col width="180">
-									<col width="95">
-									<col width="95">
-									<col width="70">
-								</colgroup>
-								<thead>
-									<tr>
-										<th>一级类目</th>
-										<th>二级类目</th>
-										<th>三级类目</th>
-										<th>是否web筛选项</th>
-										<th>是否手机标签</th>
-										<th>操作</th>
-									</tr>
-								</thead>
-								<tbody id="table">
-								</tbody>
-							</table>
-							<div id="cateWarn" class="hint error"></div>
-						</dd>
-					</dl>
-				</fieldset>
 				<fieldset class="last">
 					<dl class="item">
 						<dt class="item-label">
@@ -211,11 +165,6 @@
 	<!-- main end -->
 
 	<script type="text/javascript">
-		var selBcObj = {}, selBcIdObj = {}, bcShow = {};
-		var allTBcIds = [];
-		var tBcIds = [];
-		var fBcId, sBcId;
-		
 		//表单提交标识
 		var brandNameFlag = false;
 		var brandEnameFlag = false;
@@ -273,23 +222,18 @@
 			});
 			
 			$('#submitBtn').click(function(){
-				if(allTBcIds.length > 0){
-					var name = $.trim($("#brandName").val());
-					var ename = $.trim($("#brandEname").val());
-					
-					if(pinyinFlag && storyFlag &&
-							((brandNameFlag && brandEnameFlag) || 
-									(brandNameFlag && (ename==null || ename.length==0)) || 
-									((name==null || name=='') && brandEnameFlag))){
-						$("#myform").submit();
-					}else if((ename==null || ename=='') && (name==null || name.length==0)){
-						$("#brandName").focus().next().next().text("请至少输入一个品牌名称");
-					}else if(!pinyinFlag){
-						$("#pinyin").focus().next().text("请填写中文品牌名全拼，如果没有中文品牌则填写英文品牌，全部字母为小写");
-					}
-					
-				}else{
-					$("#cateWarn").text("请添加基础类目!");
+				var name = $.trim($("#brandName").val());
+				var ename = $.trim($("#brandEname").val());
+				
+				if(pinyinFlag && storyFlag &&
+						((brandNameFlag && brandEnameFlag) || 
+								(brandNameFlag && (ename==null || ename.length==0)) || 
+								((name==null || name=='') && brandEnameFlag))){
+					$("#myform").submit();
+				}else if((ename==null || ename=='') && (name==null || name.length==0)){
+					$("#brandName").focus().next().next().text("请至少输入一个品牌名称");
+				}else if(!pinyinFlag){
+					$("#pinyin").focus().next().text("请填写中文品牌名全拼，如果没有中文品牌则填写英文品牌，全部字母为小写");
 				}
 			});
 			
@@ -370,294 +314,6 @@
 			});	
 		});
 		
-		function selectdHandle() {
-			var re = true;
-			
-			fBcId = $('#fc').val();
-			sBcId = $('#sc').val();
-			
-			if(fBcId > -1){
-				 $('#tcE').text("");
-				 
-				 if(sBcId > -1){
-					 $('#scE').text("");
-					 
-					 selBcObj[fBcId] = $('#fc').find("option:selected").text();
-					 selBcObj[sBcId] = $('#sc').find("option:selected").text();
-					
-					 tBcIds.length = 0;
-					
-					 $("#tc :checkbox:checked").each(function(){
-						selBcObj[this.id] = $(this).next().text();
-						tBcIds.push(this.id);
-					 }); 
-					
-					 //有新增类目
-					 if(tBcIds.length > 0){
-						$('#tcE').text("");
-						re = false;
-						
-						addBcId(tBcIds, allTBcIds);
-						
-						//一级类目ID不存在 
-						if(selBcIdObj[fBcId] == undefined){
-							selBcIdObj[fBcId] = {};
-							selBcIdObj[fBcId][sBcId] = $.merge([], tBcIds);
-							selBcIdObj[fBcId]["tl"] = tBcIds.length;
-						}else{//一级类目ID存在 
-							//二级类目ID不存在 
-							if(selBcIdObj[fBcId][sBcId] == undefined){
-								selBcIdObj[fBcId][sBcId] = $.merge([], tBcIds);
-								selBcIdObj[fBcId]["tl"] += tBcIds.length;
-							}else{//二级类目ID存在 
-								//保存三级类目
-								var num = addBcId(tBcIds, selBcIdObj[fBcId][sBcId]);
-							
-								selBcIdObj[fBcId]["tl"] += num;
-							}
-						} 
-						
-						createTable();
-					 }else{
-						 $('#tcE').text("请选择三级类目");
-					 }
-				 }else{
-					$('#scE').text("请选择二级类目");
-				 }
-			}else{
-				$('#fcE').text("请选择一级类目");
-			}
-			
-			return re;
-		}
-		//创建表格
-		function createTable() {
-			$("#bcIds").val(allTBcIds.join(","));
-			
-			//类目品牌显示信息,默认都显示
-			bcShow = {};
-			for(var i in allTBcIds){
-				bcShow[allTBcIds[i]] = allTBcIds[i]+"_1_1";
-			}
-			var bcShows = [];
-			for(var key in bcShow){
-				bcShows.push(bcShow[key]);
-			}
-			$("#bcShows").val(bcShows.join(","));
-			 
-			$("#cateWarn").text("");
-			
-			var t$ = $("#table");
-			t$.empty();
-			
-			for(var fBcId in selBcIdObj){
-				var fbool = true;
-				
-				for(var sBcId in selBcIdObj[fBcId]){
-					var sbool = true;
-					var tList = selBcIdObj[fBcId][sBcId];
-					
-					for(var index in tList){
-						 var tr = "<tr>";
-						 if(fbool){
-							 tr += "<td rowspan='"+selBcIdObj[fBcId].tl+"'>"+selBcObj[fBcId]+"</td>";
-							 fbool = false;
-						 }
-						 if(sbool){
-							 tr += "<td rowspan='"+selBcIdObj[fBcId][sBcId].length+"'>"+selBcObj[sBcId]+"</td>";
-							 sbool = false;
-						 }
-						 tr += "<td>"+selBcObj[tList[index]]+"</td>";
-						 tr += '<td><input type="checkbox" name="filter" value="'+tList[index]+'" class="chk chks" checked="checked"></td>';
-						 tr += '<td><input type="checkbox" name="tag" value="'+tList[index]+'" class="chk chks" checked="checked"></td>';
-						 tr += "<td><a id='"+fBcId+"_"+sBcId+"_"+tList[index]+"' href='javascript:void(0);'>删除</a></td>";
-						 tr += "</tr>";
-						 	
-						 t$.append(tr);
-					}
-				}
-			}
-			
-			$("#table").find("a").click(function(){
-				var idArr =  this.id.split("_");
-				 
-				delete selBcObj[idArr[2]];
-				 
-				var ind = $.inArray(idArr[2], selBcIdObj[idArr[0]][idArr[1]]);
-				if(ind > -1){
-					selBcIdObj[idArr[0]][idArr[1]].splice(ind, 1);
-				}
-				
-				if(selBcIdObj[idArr[0]].tl == 1){
-					delete selBcIdObj[idArr[0]];
-				}else{
-					selBcIdObj[idArr[0]].tl--;
-				}
-				
-				ind = $.inArray(idArr[2], allTBcIds);
-				if(ind > -1){
-					allTBcIds.splice(ind, 1);
-				}
-				 
-				createTable();
-			}).end().find(":checkbox").click(function(){
-				var tbcId = this.value;
-				
-				if($(this).attr("name") == "filter"){
-					var ss = bcShow[tbcId].split("_");
-					bcShow[tbcId] = ss[0] + "_" + (this.checked?"1":"0") + "_" + ss[2];
-				}else if($(this).attr("name") == "tag"){
-					var ss = bcShow[tbcId].split("_");
-					bcShow[tbcId] = ss[0] + "_" + ss[1] + "_" + (this.checked?"1":"0");
-				}
-				
-				var bcShows = [];
-				for(var key in bcShow){
-					bcShows.push(bcShow[key]);
-				}
-				
-				$("#bcShows").val(bcShows.join(","));
-			});
-		}
-		//三级类目不存在增加,存在抛弃
-		function addBcId(sbcIds, dbcIds) {
-			var num = 0;
-			for(var i in sbcIds){
-				if($.inArray(sbcIds[i], dbcIds) == -1){
-					dbcIds.push(sbcIds[i]);
-					num ++;
-				}
-			}
-			
-			return num;
-		}
-		
-		function selCateClick() {
-			$.modaldialog('<form class="form">'+
-						'<fieldset>'+
-					'<div class="item">'+
-					'<div class="item-label"><label><em>*</em><strong>一级类目：</strong></label></div>'+
-					'<div class="item-cont">'+
-						'<div class="select">'+
-							'<select name="fc" id="fc">'+
-							    '<option>请选择</option>'+
-							'</select>'+
-						'</div>'+
-						'<div id="fcE" class="hint error"></div>'+
-					'</div>'+
-					'</div>'+
-					'<div class="item">'+
-						'<div class="item-label"><label><em>*</em><strong>二级类目：</strong></label></div>'+
-						'<div class="item-cont">'+
-							'<div class="select">'+
-								'<select name="sc" id="sc">'+
-								    '<option>请选择</option>'+
-								'</select>'+
-							'</div>'+
-							'<div id="scE" class="hint error"></div>'+
-						'</div>'+
-					'</div>'+
-					'<div class="item last">'+
-						'<div class="item-label"><label><em>*</em><strong>三级类目：</strong></label></div>'+
-						'<div class="item-cont">'+
-							'<label><input id="chkAll" type="checkbox" class="chk"><span>全选</span></label>'+
-							'<div id="tcE" class="hint error"></div>'+
-						'</div>'+
-						'<div class="type-list">'+
-							'<ul id="tc">'+
-							'</ul>'+
-						'</div>'+
-					'</div></fieldset>'+
-						'</form>', {
-				title:"操作确认",
-				dialogClass:"pop-type",
-				buttons : [{text : '提&nbsp;&nbsp;交', click:selectdHandle},{text : '取&nbsp;&nbsp;消',classes : 'btn btn-s'}]
-			});
-			
-			$('#chkAll').click(function(){
-				if(this.checked){ 
-					$("#tc :checkbox").each(function(){this.checked = true;}); 
-				}else{ 
-					$("#tc :checkbox").each(function(){this.checked = false;}); 
-				} 
-			});
-			
-			fetchSubCategory("#fc", 0);
-			
-			$('#fc').change(function() {
-				$('#fcE').text(this.value==-1?"请选择一级类目":"");
-				fetchSubCategory("#sc", this.value);
-			});
-			$('#sc').change(function() {
-				$('#scE').text(this.value==-1?"请选择二级类目":"");
-				fetchSubCategory("#tc", this.value);
-			});
-		}
-		
-		function fetchSubCategory(elemId, pId) {
-			if(pId == "-1"){
-				$('#tc').empty();
-				if(elemId == "#sc"){
-					$('#sc').empty().append('<option value="-1">请选择</option>');
-				}
-			}else if(pId >= 0){
-				$.ajax({
-					url : "${ctx}/category/noAuth/bc/pList",
-					type : "POST",
-					data : {
-						pId : pId
-					},
-					async : false,
-					success : function(list) {
-						if (list != null && list.length > 0) {
-							if(elemId == "#tc"){
-								appendLi(elemId, list);
-							}else{
-								appendOption(elemId, list);
-							}
-						}
-					}
-				});
-			}
-		}
-		function appendLi(elemId, objList) {
-			var ul$ = $(elemId);
-			ul$.empty();
-			
-			$.each(objList, function() {
-				ul$.append('<li><label><input id="' +  this.bcId + '" type="checkbox" class="chk"><span>' +  this.bcName + '</span></label></li>');
-			});
-			 
-			ul$.find(":checkbox").click(function(){
-				var chkAllFlag = this.checked;
-				if(chkAllFlag){ 
-					ul$.find(":checkbox").each(function(){
-			           	if(!this.checked){
-			        	   	chkAllFlag = false;
-			        	   	return false;
-			           	}
-			        });
-					
-					$('#tcE').text("");
-				}
-				
-				$("#chkAll").prop("checked", chkAllFlag);
-			});
-		}
-		function appendOption(elemId, objList) {
-			var sel$ = $(elemId);
-			sel$.empty();
-
-			if ("#sc" === elemId) {
-				$("#tc").empty();
-			}
-
-			sel$.append('<option value="-1">请选择</option>');
-			$.each(objList, function() {
-				sel$.append('<option value="' +  this.bcId + '">' + this.bcName
-						+ '</option>');
-			});
-		}
 		function checkName(val, flag) {
 			if(val){
 				$.ajax({

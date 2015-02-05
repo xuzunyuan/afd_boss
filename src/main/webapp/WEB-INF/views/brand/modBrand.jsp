@@ -48,15 +48,6 @@
 			</div>
 		</div>
 		<!-- foldbarV end -->
-		<!-- crumbs -->
-		<div class="crumbs crumbsA">
-			<ul>
-				<li><a href="#">后台首页</a><em>&gt;</em></li>
-				<li><a href="${ctx}/brand/list?m=33">品牌管理</a><em>&gt;</em></li>
-				<li><strong>修改品牌</strong></li>
-			</ul>
-		</div>
-		<!-- crumbs end -->
 		<!-- relateType -->
 		<div class="relateType result">
 			<div class="hintBar">
@@ -82,7 +73,7 @@
 				<div class="legend">
 					<div class="legend-meg">
 						<span>品牌输入规则</span>
-						<div class="mod-help">
+						<div class="mod-help mod-helps">
 							<i class="ico"></i>
 							<div class="text">
 								<div class="text-meg">
@@ -91,7 +82,6 @@
 									<p>2.对于没有明确官方描述的英文名称，品牌采用每个单词首字母大写，单词的其他字母小写方式录入；</p>
 									<p>3.英文品牌所有字符（含非字母字符）皆须是在英文半角状态下输入的字符，不能出现在中文状态下的或全角字符状态下输入的字符；</p>
 									<p>4.同一个品牌有且只有一个品牌名称，即官方发布的品牌；</p>
-									<p>5.至少填写一个中或英文品牌，同一个三级类目下品牌不可重复</p>
 								</div>
 							</div>
 						</div>
