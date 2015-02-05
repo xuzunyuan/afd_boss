@@ -22,37 +22,40 @@ import com.afd.boss.util.PageUtils;
 import com.afd.boss.util.PageUtils.PageInfo;
 import com.afd.common.mybatis.Page;
 import com.afd.common.util.DateUtils;
-import com.afd.common.util.RequestUtils;
-import com.afd.constants.seller.SellerConstants.SellerAudit$AuditType;
+import com.afd.model.seller.Seller;
 import com.afd.model.seller.SellerApply;
 import com.afd.model.seller.SellerAudit;
 import com.afd.model.seller.SellerLogin;
 import com.afd.service.seller.ISellerApplyService;
 import com.afd.service.seller.ISellerLoginService;
+import com.afd.service.seller.ISellerService;
 import com.afd.staff.model.TStaff;
 import com.google.common.collect.Maps;
 
 /**
- * 入驻审核
+ * 保证金审核
  * 
  * @author xuzunyuan
  * @date 2014年1月16日
  */
 @Controller
-public class ApplyController {
+public class DepositController {
 	@Autowired
 	ISellerApplyService applyService;
 
 	@Autowired
 	ISellerLoginService loginService;
 
+	@Autowired
+	ISellerService sellerService;
+
 	/**
-	 * 申请列表页面
+	 * 保证金审核列表页面
 	 * 
 	 * @return
 	 */
-	@RequestMapping("/seller/audit")
-	public String sellerAudit(HttpServletRequest request) {
+	@RequestMapping("/seller/deposit")
+	public String sellerDeposit(HttpServletRequest request) {
 		// 处理分页信息
 		PageInfo pageInfo = null;
 
@@ -102,12 +105,12 @@ public class ApplyController {
 			map.put("endDt", endDt);
 		}
 
-		Page<SellerApply> applysPage = applyService.queryWaitAuditApply(map,
-				pageInfo.getPageNo(), 20);
+		Page<SellerApply> applysPage = applyService.queryWaitDepositAuditApply(
+				map, pageInfo.getPageNo(), 20);
 
 		request.setAttribute("applysPage", applysPage);
 
-		return "/seller/auditList";
+		return "/seller/depositList";
 	}
 
 	/**
@@ -116,8 +119,8 @@ public class ApplyController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/seller/auditPage")
-	public String sellerAuditPage(HttpServletRequest request,
+	@RequestMapping("/seller/depositPage")
+	public String sellerDepositPage(HttpServletRequest request,
 			@Param("appId") int appId) {
 
 		SellerApply apply = applyService.getSellerApplyById(appId);
@@ -126,48 +129,30 @@ public class ApplyController {
 		SellerLogin login = loginService.getLoginById(apply.getSellerLoginId());
 		request.setAttribute("login", login);
 
+		Seller seller = sellerService.getSellerById(login.getSellerId());
+		request.setAttribute("seller", seller);
+
 		// 审核历史数据
 		List<SellerAudit> audits = applyService.getAuditList(apply.getAppId());
 		request.setAttribute("audits", audits);
 
-		return "/seller/auditPage";
+		return "/seller/depositPage";
 	}
 
 	/**
-	 * 审核通过
+	 * 保证金到账确认
 	 * 
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/seller/auditPass")
-	public String sellerAuditPass(HttpServletRequest request,
-			@Param("appId") int appId) {
+	@RequestMapping("/seller/depositPass")
+	public String sellerDepositPass(HttpServletRequest request,
+			@Param("sellerId") int sellerId) {
 
-		applyService.passSellerApply(appId, SellerAudit$AuditType.BASE_INFO,
-				((TStaff) SecurityUtils.getSubject().getPrincipal())
-						.getLoginName(), RequestUtils.getRemoteAddr(request),
-				null);
+		sellerService.confirmDeposit(sellerId, null, ((TStaff) SecurityUtils
+				.getSubject().getPrincipal()).getLoginName());
 
-		return "redirect:/seller/audit";
-	}
-
-	/**
-	 * 审核通过
-	 * 
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping("/seller/auditReject")
-	public String sellerAuditReject(HttpServletRequest request,
-			@Param("appId") int appId,
-			@Param("auditOpinion") String auditOpinion) {
-
-		applyService.rejectSellerApply(appId, SellerAudit$AuditType.BASE_INFO,
-				((TStaff) SecurityUtils.getSubject().getPrincipal())
-						.getLoginName(), RequestUtils.getRemoteAddr(request),
-				auditOpinion);
-
-		return "redirect:/seller/audit";
+		return "redirect:/seller/deposit";
 	}
 
 }

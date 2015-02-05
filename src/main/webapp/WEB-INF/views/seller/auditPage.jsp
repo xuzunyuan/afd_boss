@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<title>卖家申请审核-一网全城</title>
+<title>卖家申请审核-阿凡达</title>
 </head>
 <body>
 	<!-- foldbarV -->
@@ -26,7 +26,7 @@
 					</dd>
 				</dl>
 			</div>
-			<form class="form formA">
+			<form action="" method="post" id="frm">
 				<fieldset>
 					<div class="mod-info">
 						<div class="item">
@@ -261,7 +261,7 @@
 					<input type="button" class="btn" value="驳回申请" id="btnReject" onclick="reject()">	
 					</c:if>
 				</div>
-			</form>
+			
 			<c:if test="${!empty(audits)}">
 			<table class="table tableC">
 				<colgroup>
@@ -301,7 +301,6 @@
 		</div>
 	<!-- sellerData end-->
 	
-	<form action="" method="post" id="frm">
 	<div class="pop" id="popReject" style="display:none">
 		<div class="hd">
 			<h1>操作确认</h1>

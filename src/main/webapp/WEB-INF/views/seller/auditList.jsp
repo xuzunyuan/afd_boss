@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<title>卖家申请审核-一网全城</title>
+<title>卖家申请审核-阿凡达</title>
 </head>
 <body>
 	<script type="text/javascript" src="${ctx}/static/js/datePicker/WdatePicker.js"></script>

@@ -7,637 +7,269 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<title>保证金到账确认-一网全城</title>
+<title>保证金审核-阿凡达</title>
 </head>
 <body>
-	<script type="text/javascript" src="../static/js/jquery.md.js?t=2014061701"></script>
-	<!-- main -->
-	<div class="main">
-		<!-- foldbarV -->
-		<div id="foldbarV">
-			<div class="foldbarV">
-				<div class="foldBtn"></div>
-			</div>
-		</div>
-		<!-- foldbarV end -->
-		<!-- crumbs -->
-		<div class="crumbs crumbsA">
-			<ul>
-				<li><a href="#">后台首页</a><em>&gt;</em></li>
-				<li><a href="#">卖家管理</a><em>&gt;</em></li>
-				<li><strong>保证金到账审核</strong></li>
-			</ul>
-		</div>
-		<!-- crumbs end -->
-		<!-- sellerData -->
-		<div class="sellerData cashData">
+	<!-- foldbarV -->
+	<div id="foldbarV"><div class="foldbarV"><div class="foldBtn"></div></div></div>
+	<!-- foldbarV end -->
+	<!-- sellerData -->
+		<div class="sellerData companybaseData">
 			<div class="hintBar">
 				<dl>
-					<dt>
-						<i class="icon i-exclaim"></i>
-					</dt>
+					<dt><i class="icon i-exclaim"></i></dt>
 					<dd>
 						<h4>请注意：</h4>
 						<ul>
-							<li><em>·</em>请在1个工作日内审核完成卖家的保证金到账情况；</li>
-							<li><em>·</em>该审核通过后，系统将自动开通卖家店铺商品上架权限及其他全部操作权限。</li>
+							<li><em>·</em>保证金确认到账后，系统将自动开通商家添加和管理专场活动的权限。</li>
 						</ul>
 					</dd>
 				</dl>
 			</div>
-			<!-- tab -->
-			<div class="tab">
-				<div class="tabs">
-					<ul>
-						<li class="back-btn"><input type="button" class="btn btn-s" onclick="window.location.href='../seller/deposit';" value="返&nbsp;&nbsp;回"></li>
-						<li class="on" style="cursor: pointer;" value="baseInfo">基本资料项</li>
-						<li style="cursor: pointer;" value="storeInfo">店铺资料项</li>
-					</ul>
-				</div>
-			</div>
-			<!-- tab end -->
 			
-			<form class="form formA" id="storeInfo" style="display:none;">
 				<fieldset>
-					<dl class="item">
-						<dt class="item-label">
-							<label><em>*</em>店铺名称：</label>
-						</dt>
-						<dd class="item-cont">
-							<p>
-								 <c:if test="${not empty storeName }">
-								 	<c:out value="${storeName}"></c:out>
-								 </c:if>
-							</p>
-						</dd>
-					</dl>
-					<c:if test="${apply.applyType == 98}">
-					<dl class="item">
-									<dt class="item-label">
-										<label><em>*</em>公司类型：</label>
-									</dt>
-									<dd class="item-cont">
-										<p>
-											<c:choose>
-							      				<c:when test="${apply.coType == 49}">生产厂家</c:when>
-							      				<c:when test="${apply.coType == 50}">品牌商</c:when>
-							      				<c:when test="${apply.coType == 51}">代理商</c:when>
-							      				<c:when test="${apply.coType == 52}">经营商</c:when>
-							      				<c:otherwise>其它</c:otherwise>
-							      			</c:choose>
-										</p>
-									</dd>
-								</dl>
-					</c:if>
-					<dl class="item item-last">
-						<dt class="item-label">
-							<label><em>*</em>签约品类：</label>
-						</dt>
-						<dd class="item-cont">
-							<table class="table tableD">
+					<div class="mod-info">
+						<div class="item">
+							<h2>商家注册信息</h2>
+							<table>
 								<colgroup>
-									<col width="50">
-									<col width="160">
-									<col width="250">
-									<col width="90">
-									<col width="90">
+									<col width="120">
+									<col>
+									<col width="120">
+									<col>
+									<col width="120">
+									<col>
 								</colgroup>
-								<thead>
-									<tr>
-										<th>序号</th>
-										<th>一级类目</th>
-										<th>二级类目</th>
-										<th>扣点</th>
-										<th>保证金</th>
-									</tr>
-								</thead>
 								<tbody>
-									<c:set var="label" value="0"></c:set>
-									<c:forEach var="cc" items="${ccs}" varStatus="fsta">
-										<c:forEach var="scc" items="${cc.categories}" varStatus="ssta">
-											<tr>
-												<c:set var="label" value="${label+1}"></c:set>
-												<td><c:out value="${label}"/></td>
-												<c:if test="${ssta.first}"><td rowspan="${fn:length(cc.categories)}"><c:out value="${cc.ccName}"/></td></c:if>
-												<td><c:out value="${scc.ccName}"/></td>
-												<td>-</td>
-												<td>-</td>
-											</tr>
-										</c:forEach>
-									</c:forEach>
+									<tr>
+										<th>商家账号：</th>
+										<td><a href="#" class="buyerName"><c:out value="${login.loginName}"/></a></td>
+										<th class="emphasis">运营审核状态：</th>
+										<td class="emphasis">
+												<c:choose>
+													<c:when test="${apply.status == '1'}">待审核</c:when>
+													<c:when test="${apply.status == '2'}">通过</c:when>
+													<c:when test="${apply.status == '3'}">驳回</c:when>
+												</c:choose>	
+										</td>
+									</tr>
+									<tr>
+										<th>申请时间：</th>
+										<td><fmt:formatDate value="${apply.applyDate}" pattern="yyyy-MM-dd HH:mm:ss" type="both"/></td>
+										<th class="emphasis">保证金到账状态：</th>
+										<td class="emphasis">
+											<c:choose>
+												<c:when test="${empty(seller.isPaidDeposit) || seller.isPaidDeposit == '0'}">未到账</c:when>
+												<c:when test="${seller.isPaidDeposit == '1'}">已到账</c:when>
+											</c:choose>
+										</td>
+									</tr>
 								</tbody>
 							</table>
-						</dd>
-					</dl>
-					<c:if test="${apply.applyType == 98}">
-						<dl class="item item-last">
-							<dt class="item-label">
-								<label>类目行业资源：</label>
-							</dt>
-							<dd class="item-cont">
-								<table class="table tableD">
-									<colgroup>
-										<col width="80">
-										<col width="200">
-										<col width="180">
-										<col width="180">
-									</colgroup>
-									<thead>
-										<tr>
-											<th>类目名称</th>
-											<th>资质名称</th>
-											<th>电子版</th>
-											<th>到期日</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:if test="${not empty qualis}">
-										<c:forEach var="quali" items="${qualis}">
-											<tr>
-												<td><c:out value="${quali.ccName}"/></td>
-												<td><c:out value="${quali.qualiName}"/></td>
-												<td>
-													<div class="mod-pic">
-														<img src="<c:choose><c:when test="${empty quali.quailUrl}">http://img.seller.yiwangimg.com/temp/zhengjian.png</c:when><c:otherwise>${imgDownDomain}${quali.quailUrl}&op=s1_w98_h86_e1-c3_w98_h86</c:otherwise></c:choose>" alt="">
-														<div class="maskBar"></div>
-														<p class="textBar"><a href="<c:choose><c:when test="${empty quali.quailUrl}">http://img.seller.yiwangimg.com/temp/zhengjian.png</c:when><c:otherwise>${imgDownDomain}${quali.quailUrl}</c:otherwise></c:choose>" target="_blank">查看大图</a></p>
-													</div>
-												</td>
-												<td>
-													<c:out value="${quali.expireDate}" default="永久"/>
-												</td>
-											</tr>
-										</c:forEach>
-										</c:if>
-									</tbody>
-								</table>
-							</dd>
-						</dl>
-					</c:if>
-				</fieldset>
-			</form>
-			
-			<form id="baseInfo" class="form formA">
-				<div class="mod-info">
-					<div class="item">
-						<h2>卖家账号注册信息</h2>
-						<table>
-							<colgroup>
-								<col width="120">
-								<col>
-								<col width="120">
-								<col>
-								<col width="120">
-								<col>
-							</colgroup>
-							<tbody>
-								<tr>
-									<th>卖家账号：</th> 
-									<td><c:out value="${login.loginName}"/></td>
-									<th>账号状态：</th>
-									<td>
-									<c:choose>
-					      				<c:when test="${login.status == 48}">初始</c:when>
-					      				<c:when test="${login.status == 49}">正常</c:when>
-					      				<c:when test="${login.status == 50}">冻结</c:when>
-					      			</c:choose>
-			      					</td>
-									<th class="emphasis">基本资料审核状态：</th>
-									<td class="emphasis">
-										 <c:choose>
-						      				<c:when test="${apply.status == 49}">待审核</c:when>
-						      				<c:when test="${apply.status == 50}">审核通过</c:when>
-						      				<c:when test="${apply.status == 51}">已驳回</c:when>
-						      			</c:choose>
-									</td>
-								</tr>
-								<tr>
-									<th>验证手机号：</th>
-									<td>${login.mobile}</td>
-									<th>入驻申请时间：</th>
-									<td><fmt:formatDate value="${apply.applyDate}" pattern="yyyy-MM-dd HH:mm" type="both"/></td>
-									<th class="emphasis">保证金到账状态：</th>
-									<td class="emphasis">未到账</td>
-								</tr>
-								<tr>
-									<th>注册时间：</th>
-									<td><fmt:formatDate value="${login.regDate}" pattern="yyyy-MM-dd HH:mm" type="both"/></td>
-									<th>店铺类型：</th>
-									<td>
-										<c:choose>
-						      				<c:when test="${apply.applyType == 99}">
-						      					个人店铺
-						      				</c:when>
-						      				<c:when test="${apply.applyType == 98}">
-						      					商家店铺
-						      				</c:when>
-						      			</c:choose>
-									</td>
-									<th class="emphasis">店铺资料审核状态：</th>
-									<td class="emphasis">
-										 <c:choose>
-						      				<c:when test="${apply.storeAuditStatus == 49}">待审核</c:when>
-						      				<c:when test="${apply.storeAuditStatus == 50}">审核通过</c:when>
-						      				<c:when test="${apply.storeAuditStatus == 51}">已驳回</c:when>
-						      			</c:choose>
-									</td>
-								</tr>
-							</tbody>
-						</table>
+						</div><!-- item end -->
 					</div>
-					<!-- item end -->
-				</div>
-				<c:choose>
-      				<c:when test="${apply.applyType == 99}">
-						<fieldset>
+					<div class="legend"><h3>企业信息</h3></div>
+					<div class="formBox">
+						<div class="formRow">
 							<dl class="item">
 								<dt class="item-label">
-									<label><em>*</em>卖家名称：</label>
+									<label>公司名称：</label>
 								</dt>
 								<dd class="item-cont">
-									<p><c:out value="${apply.realName}"/></p>
+									<p>
+										<c:out value="${apply.coName}"/>
+									</p>
 								</dd>
 							</dl>
 							<dl class="item">
 								<dt class="item-label">
-									<label>是否办理营业执照：</label>
+									<label>营业执照注册号：</label>
 								</dt>
 								<dd class="item-cont">
-									<p><c:out value="${apply.isBizLicense ? '办理' : '不办理'}"></c:out></p>
+									<p><c:out value="${apply.coBln}"/></p>
 								</dd>
 							</dl>
 							<dl class="item">
 								<dt class="item-label">
-									<label><em>*</em>身份证号码：</label>
+									<label>法人姓名：</label>
 								</dt>
 								<dd class="item-cont">
-									<p><c:out value="${apply.certCode}"/></p>
+									<p><c:out value="${apply.lpName}"/></p>
 								</dd>
 							</dl>
 							<dl class="item">
 								<dt class="item-label">
-									<label><em>*</em>身份证到期日期：</label>
+									<label>注册资本：</label>
 								</dt>
 								<dd class="item-cont">
-									<p><fmt:formatDate value="${apply.certExpireDate}" pattern="yyyy-MM-dd" type="date"/></p>
+									<p><c:out value="${apply.registerCapital}"/> / 万元</p>
 								</dd>
 							</dl>
 							<dl class="item">
 								<dt class="item-label">
-									<label><em>*</em>卖家半身照：</label>
+									<label>经营范围：</label>
 								</dt>
 								<dd class="item-cont">
-									<div class="mod-pic pic-id">
-										<img src="<c:choose><c:when test="${empty pic}">http://img.seller.yiwangimg.com/images/img_06.png</c:when><c:otherwise>${imgDownDomain}${pic}&op=s1_w116_h86_e1-c3_w116_h86</c:otherwise></c:choose>" alt="" >
+									<p><c:out value="${apply.bizScope}"/></p>
+								</dd>
+							</dl>
+						</div>
+						<div class="formRow">
+							<dl class="item">
+								<dt class="item-label">
+									<label>营业期限：</label>
+								</dt>
+								<dd class="item-cont">
+									<p><fmt:formatDate value="${apply.btStartDate}" pattern="yyyy-MM-dd"/> 至 <fmt:formatDate value="${apply.btEndDate}" pattern="yyyy-MM-dd"/></p>
+								</dd>
+							</dl>
+						</div>
+						<div class="formRow">
+							<dl class="item">
+								<dt class="item-label">
+									<label>营业执照所在地：</label>
+								</dt>
+								<dd class="item-cont">
+									<p><c:out value="${apply.btGeo}"/></p>
+								</dd>
+							</dl>
+						</div>
+						<div class="formRow">
+							<dl class="item">
+								<dt class="item-label">
+									<label>旗下/代理品牌：</label>
+								</dt>
+								<dd class="item-cont">
+									<p><c:out value="${apply.coBrand}"/></p>
+								</dd>
+							</dl>
+						</div>
+					</div>
+					</fieldset>
+					<fieldset>
+					<div class="legend"><h3>资料上传</h3></div>
+					<div class="formBox">
+						<div class="formRow">
+							<dl class="item">
+								<dt class="item-label">
+									<label>营业执照副本扫描件：</label>
+								</dt>
+								<dd class="item-cont">
+									<div class="mod-pic pic-papers">
+										<img src="${my:random(imgGetUrl).concat(apply.btImg)}" alt="">
 										<div class="maskBar"></div>
-										<p class="textBar">
-											<a href="<c:choose><c:when test="${empty pic}">http://img.seller.yiwangimg.com/images/img_06.png</c:when><c:otherwise>${imgDownDomain}${pic}</c:otherwise></c:choose>" target="_blank">查看大图</a>
-										</p>
+										<p class="textBar"><a href="${my:random(imgGetUrl).concat(apply.btImg)}" target="_blank">查看大图</a></p>
 									</div>
 								</dd>
 							</dl>
 							<dl class="item">
 								<dt class="item-label">
-									<label><em>*</em>身份证正面照：</label>
+									<label>组织机构代码证电子版：</label>
 								</dt>
 								<dd class="item-cont">
-									<div class="mod-pic pic-id">
-										<img src="<c:choose><c:when test="${empty frontUrl}">http://img.seller.yiwangimg.com/temp1.png</c:when><c:otherwise>${imgDownDomain}${frontUrl}&op=s1_w116_h86_e1-c3_w116_h86</c:otherwise></c:choose>"  >
+									<div class="mod-pic pic-papers">
+										<img src="${my:random(imgGetUrl).concat(apply.orgCodeImg)}" alt="">
 										<div class="maskBar"></div>
-										<p class="textBar">
-											<a href="<c:choose><c:when test="${empty frontUrl}">http://img.seller.yiwangimg.com/temp1.png</c:when><c:otherwise>${imgDownDomain}${frontUrl}</c:otherwise></c:choose>" target="_blank">查看大图</a>
-										</p>
+										<p class="textBar"><a href="${my:random(imgGetUrl).concat(apply.orgCodeImg)}" target="_blank">查看大图</a></p>
+									</div>
+								</dd>
+							</dl>
+						</div>
+						<div class="formRow">
+							<dl class="item">
+								<dt class="item-label">
+									<label>税务登记证电子版：</label>
+								</dt>
+								<dd class="item-cont">
+									<div class="mod-pic pic-papers">
+										<img src="${my:random(imgGetUrl).concat(apply.taxImg)}" alt="">
+										<div class="maskBar"></div>
+										<p class="textBar"><a href="${my:random(imgGetUrl).concat(apply.taxImg)}"  target="_blank">查看大图</a></p>
 									</div>
 								</dd>
 							</dl>
 							<dl class="item">
 								<dt class="item-label">
-									<label><em>*</em>身份证背面照：</label>
+									<label>银行开户许可证电子版：</label>
 								</dt>
 								<dd class="item-cont">
-									<div class="mod-pic pic-id">
-										<img src="<c:choose><c:when test="${empty backUrl}">http://img.seller.yiwangimg.com/temp2.png</c:when><c:otherwise>${imgDownDomain}${backUrl}&op=s1_w116_h86_e1-c3_w116_h86</c:otherwise></c:choose>"  >
+									<div class="mod-pic pic-papers">
+										<img src="${my:random(imgGetUrl).concat(apply.bankLicenseImg)}" alt="">
 										<div class="maskBar"></div>
-										<p class="textBar">
-											<a href="<c:choose><c:when test="${empty backUrl}">http://img.seller.yiwangimg.com/temp2.png</c:when><c:otherwise>${imgDownDomain}${backUrl}</c:otherwise></c:choose>" target="_blank">查看大图</a>
-										</p>
+										<p class="textBar"><a href="${my:random(imgGetUrl).concat(apply.bankLicenseImg)}"  target="_blank">查看大图</a></p>
 									</div>
 								</dd>
 							</dl>
+						</div>
+					</div>
+					</fieldset>
+					<fieldset class="last">
+					<div class="legend"><h3>联系人信息</h3></div>
+					<div class="formBox">
+						<div class="formRow">
 							<dl class="item">
 								<dt class="item-label">
-									<label><em>*</em>手机号码：</label>
+									<label>联系人姓名：</label>
 								</dt>
 								<dd class="item-cont">
-									<p>${apply.mobile}</p>
+									<p>
+										<c:out value="${apply.bizManName}"/>
+									</p>
 								</dd>
 							</dl>
 							<dl class="item">
 								<dt class="item-label">
-									<label>固定电话：</label>
+									<label>联系人手机：</label>
+								</dt>
+								<dd class="item-cont">
+									<p>
+										<c:out value="${apply.bizManMobile}"/>
+									</p>
+								</dd>
+							</dl>
+							<dl class="item">
+								<dt class="item-label">
+									<label>联系人固定电话：</label>
 								</dt>
 								<dd class="item-cont">
 									<p><c:out value="${apply.tel}"/></p>
 								</dd>
 							</dl>
+						</div>
+						<div class="formRow">
 							<dl class="item">
 								<dt class="item-label">
-									<label><em>*</em>联系地址：</label>
+									<label>电子邮箱：</label>
 								</dt>
 								<dd class="item-cont">
-									<p><c:out value="${cityName}"/>&nbsp;&nbsp;<c:out value="${apply.addr}"/></p>
+									<p>
+										<c:out value="${apply.bizManEmail}"/>
+									</p>
 								</dd>
 							</dl>
-							<dl class="item item-last">
+							<dl class="item">
 								<dt class="item-label">
-									<label><em>*</em>邮政编码：</label>
+									<label>传真号码：</label>
 								</dt>
 								<dd class="item-cont">
-									<p>${apply.zipCode}</p>
+									<p>
+										<c:out value="${apply.fax}"/>
+									</p>
 								</dd>
 							</dl>
-						</fieldset>
-					</c:when>
-      				<c:when test="${apply.applyType == 98}">
-      					<fieldset>
-								<div class="legend"><h3>营业执照信息（副本）</h3></div>
-								<div class="formBox">
-									<div class="formRow">
-										<dl class="item">
-											<dt class="item-label">
-												<label><em>*</em>公司名称：</label>
-											</dt>
-											<dd class="item-cont">
-												<p>
-													<c:out value="${apply.coName}"/>
-												</p>
-											</dd>
-										</dl>
-										<dl class="item">
-											<dt class="item-label">
-												<label><em>*</em>公司所在地：</label>
-											</dt>
-											<dd class="item-cont">
-												<p>
-													<c:out value="${cityName}"/>&nbsp;&nbsp;<c:out value="${apply.addr}"/>
-												</p>
-											</dd>
-										</dl>
-										<dl class="item">
-											<dt class="item-label">
-												<label><em>*</em>公司电话：</label>
-											</dt>
-											<dd class="item-cont">
-												<p>
-													${apply.tel}
-												</p>
-											</dd>
-										</dl>
-									</div>
-									<div class="formRow">
-										<dl class="item">
-											<dt class="item-label">
-												<label><em>*</em>营业执照副本电子版：</label>
-											</dt>
-											<dd class="item-cont">
-												<div class="mod-pic pic-papers">
-													<img src="<c:choose><c:when test="${empty url[0]}">http://img.seller.yiwangimg.com/temp/zhengjian.png</c:when><c:otherwise>${imgDownDomain}${url[0]}&op=s1_w98_h86_e1-c3_w98_h86</c:otherwise></c:choose>" alt="">
-													<div class="maskBar"></div>
-													<p class="textBar"><a href="<c:choose><c:when test="${empty url[0]}">http://img.seller.yiwangimg.com/temp/zhengjian.png</c:when><c:otherwise>${imgDownDomain}${url[0]}</c:otherwise></c:choose>" target="_blank">查看大图</a></p>
-												</div>
-											</dd>
-										</dl>
-									</div>
-								</div>
-							</fieldset>
-							<fieldset>
-								<div class="legend"><h3>组织机构代码证</h3></div>
-								<div class="formBox">
-									<div class="formRow">
-										<dl class="item">
-											<dt class="item-label">
-												<label><em>*</em>组织机构代码证：</label>
-											</dt>
-											<dd class="item-cont">
-												<p>
-													${apply.orgCode}
-												</p>
-											</dd>
-										</dl>
-									</div>
-									<div class="formRow">
-										<dl class="item">
-											<dt class="item-label">
-												<label><em>*</em>组织机构代码证电子版：</label>
-											</dt>
-											<dd class="item-cont">
-												<div class="mod-pic pic-papers">
-													<img src="<c:choose><c:when test="${empty url[1]}">http://img.seller.yiwangimg.com/temp/zhengjian.png</c:when><c:otherwise>${imgDownDomain}${url[1]}&op=s1_w98_h86_e1-c3_w98_h86</c:otherwise></c:choose>" alt="">
-													<div class="maskBar"></div>
-													<p class="textBar"><a href="<c:choose><c:when test="${empty url[1]}">http://img.seller.yiwangimg.com/temp/zhengjian.png</c:when><c:otherwise>${imgDownDomain}${url[1]}</c:otherwise></c:choose>" target="_blank">查看大图</a></p>
-												</div>
-											</dd>
-										</dl>
-									</div>
-								</div>
-							</fieldset>
-							<fieldset>
-								<div class="legend"><h3>税务登记证</h3></div>
-								<div class="formBox">
-									<div class="formRow">
-										<dl class="item">
-											<dt class="item-label">
-												<label><em>*</em>纳税人识别号：</label>
-											</dt>
-											<dd class="item-cont">
-												<p>
-													${apply.taxNo}
-												</p>
-											</dd>
-										</dl>
-										<dl class="item">
-											<dt class="item-label">
-												<label><em>*</em>纳税人类型：</label>
-											</dt>
-											<dd class="item-cont">
-												<p>
-													<c:choose>
-									      				<c:when test="${apply.taxType == 49}">一般纳税人</c:when>
-									      				<c:when test="${apply.taxType == 50}">小规模纳税人</c:when>
-									      				<c:when test="${apply.taxType == 51}">非增值税纳税人</c:when>
-									      			</c:choose>
-												</p>
-											</dd>
-										</dl>
-										<dl class="item">
-											<dt class="item-label">
-												<label>纳税税率：</label>
-											</dt>
-											<dd class="item-cont">
-												<p>
-													${apply.taxRatio}%
-												</p>
-											</dd>
-										</dl>
-									</div>
-									<div class="formRow">
-										<dl class="item">
-											<dt class="item-label">
-												<label><em>*</em>税务登记证电子版：</label>
-											</dt>
-											<dd class="item-cont">
-												<div class="mod-pic pic-papers">
-													<img src="<c:choose><c:when test="${empty url[2]}">http://img.seller.yiwangimg.com/temp/zhengjian.png</c:when><c:otherwise>${imgDownDomain}${url[2]}&op=s1_w98_h86_e1-c3_w98_h86</c:otherwise></c:choose>" alt="">
-													<div class="maskBar"></div>
-													<p class="textBar"><a href="<c:choose><c:when test="${empty url[2]}">http://img.seller.yiwangimg.com/temp/zhengjian.png</c:when><c:otherwise>${imgDownDomain}${url[2]}</c:otherwise></c:choose>" target="_blank">查看大图</a></p>
-												</div>
-											</dd>
-										</dl>
-									</div>
-								</div>
-							</fieldset>
-							<fieldset>
-								<div class="legend"><h3>开户银行许可证</h3></div>
-								<div class="formBox">
-									<div class="formRow">
-										<dl class="item">
-											<dt class="item-label">
-												<label><em>*</em>银行开户名：</label>
-											</dt>
-											<dd class="item-cont">
-												<p>
-													<c:out value="${apply.bankAcctName}"/>
-												</p>
-											</dd>
-										</dl>
-										<dl class="item">
-											<dt class="item-label">
-												<label><em>*</em>公司银行账号：</label>
-											</dt>
-											<dd class="item-cont">
-												<p>
-													<c:out value="${apply.bankAcctNo}"/>
-												</p>
-											</dd>
-										</dl>
-										<dl class="item">
-											<dt class="item-label">
-												<label>开户银行支行名称：</label>
-											</dt>
-											<dd class="item-cont">
-												<p>
-													<c:out value="${apply.branchName}"/>
-												</p>
-											</dd>
-										</dl>
-										<dl class="item">
-											<dt class="item-label">
-												<label>开户银行支行联行号：</label>
-											</dt>
-											<dd class="item-cont">
-												<p>
-													<c:out value="${apply.branchNo}"/>
-												</p>
-											</dd>
-										</dl>
-										<dl class="item">
-											<dt class="item-label">
-												<label>开户银行支行所在地：</label>
-											</dt>
-											<dd class="item-cont">
-												<p>
-													<c:out value="${bankCityName}"/>
-												</p>
-											</dd>
-										</dl>
-									</div>
-									<div class="formRow">
-										<dl class="item">
-											<dt class="item-label">
-												<label><em>*</em>银行开户许可证电子版：</label>
-											</dt>
-											<dd class="item-cont">
-												<div class="mod-pic pic-papers">
-													<img src="<c:choose><c:when test="${empty url[3]}">http://img.seller.yiwangimg.com/temp/zhengjian.png</c:when><c:otherwise>${imgDownDomain}${url[3]}&op=s1_w98_h86_e1-c3_w98_h86</c:otherwise></c:choose>" alt="">
-													<div class="maskBar"></div>
-													<p class="textBar"><a href="<c:choose><c:when test="${empty url[3]}">http://img.seller.yiwangimg.com/temp/zhengjian.png</c:when><c:otherwise>${imgDownDomain}${url[3]}</c:otherwise></c:choose>" target="_blank">查看大图</a></p>
-												</div>
-											</dd>
-										</dl>
-									</div>
-								</div>
-							</fieldset>
-							<fieldset class="last">
-								<div class="legend"><h3>卖家入驻信息人信息</h3></div>
-								<div class="formBox">
-									<div class="formRow">
-										<dl class="item">
-											<dt class="item-label">
-												<label>联系人姓名：</label>
-											</dt>
-											<dd class="item-cont">
-												<p>
-													<c:out value="${apply.realName}"/>
-												</p>
-											</dd>
-										</dl>
-										<dl class="item">
-											<dt class="item-label">
-												<label><em>*</em>联系人手机：</label>
-											</dt>
-											<dd class="item-cont">
-												<p>
-													${apply.mobile}
-												</p>
-											</dd>
-										</dl>
-										<dl class="item">
-											<dt class="item-label">
-												<label>其他联系姓名：</label>
-											</dt>
-											<dd class="item-cont">
-												<p>
-													<c:out value="${apply.otherContactor}"/>
-												</p>
-											</dd>
-										</dl>
-									</div>
-									<div class="formRow">
-										<dl class="item">
-											<dt class="item-label">
-												<label>其他联系手机号：</label>
-											</dt>
-											<dd class="item-cont">
-												<p>
-													<c:out value="${apply.otherMobile}"/>
-												</p>
-											</dd>
-										</dl>
-										<dl class="item">
-											<dt class="item-label">
-												<label><em>*</em>电子邮箱：</label>
-											</dt>
-											<dd class="item-cont">
-												<p>
-													<c:out value="${apply.email}"/>
-												</p>
-											</dd>
-										</dl>
-									</div>
-								</div>
-							</fieldset>
-   					</c:when>
-   				</c:choose>
-			</form>
-			
-			<div class="formBtn">
-				<button id="confirmAudit" type="button" class="btnC">审核通过</button>
-			</div>
-			
+						</div>
+					</div>
+				</fieldset>
+				<div class="formBtn">
+					<c:if test="${empty(seller.isPaidDeposit) || seller.isPaidDeposit == '0'}">
+					<button type="button" class="btnC" id="btnPass" onclick="pass()">确认到账</button>
+					</c:if>
+					<input type="button" class="btn" value="取消" onclick="javascript:location.href='${ctx}/seller/deposit';">	
+				</div>
+
 			<c:if test="${!empty(audits)}">
 			<table class="table tableC">
 				<colgroup>
-					<col>
 					<col>
 					<col>
 					<col>
@@ -645,88 +277,65 @@
 				</colgroup>
 				<thead>
 					<tr>
-						<th colspan="5" class="caption">审核历史</th>
+						<th colspan="4" class="caption">商家审核历史</th>	
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<th>更新时间</th>
-						<th>审核项目</th>
 						<th>状态名称</th>
 						<th>操作人</th>
-						<th>操作说明</th>
+						<th>操作说明</th>		
 					</tr>
-					<c:forEach var="audit" items="${audits}">
-					<tr>
-						<td><fmt:formatDate value="${audit.auditDate}" pattern="yyyy-MM-dd HH:mm:ss" type="both"/></td>
+					<c:forEach items="${audits}" var="audit">
+						<tr>
+						<td><fmt:formatDate value="${audit.auditDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 						<td>
 							<c:choose>
-			      				<c:when test="${audit.auditType == 49}">基本资料审核</c:when>
-			      				<c:when test="${audit.auditType == 50}">店铺审核</c:when>
-			      			</c:choose>
+								<c:when test="${audit.auditResult == '0'}">驳回</c:when>
+								<c:when test="${audit.auditResult == '1'}">通过</c:when>
+							</c:choose>
 						</td>
-						<td><c:out value="${audit.auditResult ? '审核通过' : '审核驳回'}"/></td>
 						<td><c:out value="${audit.auditor}"/></td>
-						<td><c:out value="${audit.auditOpinion}"/></td>
+						<td><c:out value="${audit.auditOpinion}"/></td>						
 					</tr>
-					</c:forEach>
+					</c:forEach>					
 				</tbody>
 			</table>
 			</c:if>
-			
 		</div>
-		<!-- sellerData end-->
+	<!-- sellerData end-->	
+	
+	
+	<div class="pop" id="popPass" style="display:none">
+		<div class="hd">
+			<h1>操作确认</h1>
+			<span><i class="icon i-close" title="关闭" onclick="closePass()"></i></span>
+		</div>
+		<div class="bd">
+			<div class="pop-con">
+				<h2><i class="icon i-duigou"><!--<i class="icon i-warns"></i>--></i>确认保证金到账吗?</h2>
+				<p class="xitongP">点击‘确定’ 确认到账；点击‘取消’取消本次审核操作，并关闭当前窗口。</p>
+			</div>
+			<div class="formBtn">
+				<input type="button" value="确定" class="btnB btn-s" onclick="commitPass()">
+				<input type="button" value="取消" class="btnA btn-s" onclick="closePass()">
+			</div>
+		</div>
 	</div>
-	<!-- main end -->
-	 
-	<script type="text/javascript">
-		$(function(){
-			$("#confirmAudit").on("click", function(){
-				var msg = '<p><span>•</span>点击‘确定’，系统将开通该店铺的全部操作权限！</p><p><span>•</span>确认审核通过吗？</p>';
-				$.modaldialog(msg,{
-					title : '操作确认',
-					buttons : [{text:'确&nbsp;&nbsp;定',classes:'btnB btn-s',click:depositPass},{text : '取&nbsp;&nbsp;消',classes : 'btn btn-s'}]
-				});
-			});
-			
-			$(".tabs li").on("click", function(){
-				var $li = $(this);
-				if(!$li.hasClass("back-btn")){
-					$li.siblings("li").removeClass("on");
-					$li.addClass("on");
-					
-					var name = $li.attr("value");
-					if(name == "baseInfo"){
-						$("#storeInfo").hide();
-						$("#baseInfo").show();
-					}else{
-						$("#baseInfo").hide();
-						$("#storeInfo").show();
-					}
-				}
-			});
-		});
-		
-		function depositPass() {
-			$.ajax({
-				url : "depositOp",
-				type : "POST",
-				data : {storeId : '${login.storeId}'},
-				success : function(data) {
-					if(data) {
-						$.modaldialog('<h2><i class="icon i-duigou"></i>审核通过</h2><p class="xitongP">系统已开通该卖家的店铺操作权限，谢谢！</p>',{
-							buttons : [{text:'确&nbsp;&nbsp;定',classes:'btnB btn-s',click:function(){window.location.href = 'deposit?m=23';}}]
-						});
-						
-					}  else {
-						$.modaldialog('<h2><i class="icon i-duigou"></i>操作失败！</h2>');
-					}
-				},
-				error : function() {
-					$.modaldialog('<h2><i class="icon i-duigou"></i>操作失败！</h2>');
-				}
-			});
-		}
-	</script>
+	<div class="mask" id="mask"  style="display:none"></div>
+	
+<script type="text/javascript">
+function closePass() {
+	$('#popPass,#mask').hide();
+}
+function pass(){
+	$('#popPass,#mask').show();
+}
+
+function commitPass() {
+	location.href = '${ctx}/seller/depositPass?sellerId=${seller.sellerId}';
+}
+</script>
 </body>
 </html>

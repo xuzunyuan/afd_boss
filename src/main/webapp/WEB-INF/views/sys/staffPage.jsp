@@ -13,7 +13,7 @@ request.setAttribute("currentStaff", org.apache.shiro.SecurityUtils.getSubject()
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<title>用户管理-一网全城</title>
+<title>用户管理-阿凡达</title>
 </head>
 <body>
 	<script type="text/javascript" src="../static/js/modaldialog/jquery.modaldialog.js?t=<%= new java.util.Date().getTime() %>"></script>
