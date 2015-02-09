@@ -122,10 +122,11 @@
 							</dl>
 							<dl class="item">
 								<dt class="item-label">
-									<label>品牌缩写名：</label>
+									<label>品牌简述：</label>
 								</dt>
 								<dd class="item-cont">
-									<input id="brandAbbr" name="brandAbbr" type="text" class="txt textC" maxlength="15">
+									<textarea id="brandAbbr" name="brandAbbr" rows="5" cols="60"></textarea>
+									<div class="hint error"></div>
 								</dd>
 							</dl>
 							<dl class="item">
@@ -157,7 +158,7 @@
 			</form>
 			<div class="formBtn">
 				<button id="submitBtn" type="button" class="btnC" >保 存</button>
-				<input type="button" class="btn" value="取 消" onclick="window.location.href='${ctx}/brand/list?m=33'">
+				<input type="button" class="btn" value="取 消" onclick="window.location.href='${ctx}/brand/list?m=75'">
 			</div>
 		</div>
 		<!-- resultUploding end-->
@@ -170,6 +171,7 @@
 		var brandEnameFlag = false;
 		var pinyinFlag = false;
 		var storyFlag = true;
+		var brandAbbrFlag = true;
 		
 		$(function() {
 			
@@ -208,6 +210,8 @@
 			});
 			
 			$("#pinyin").blur(function(){
+				pinyinFlag = false;
+				
 				var pinyin = $.trim($(this).val());
 				if(pinyin==null || pinyin=='' || isChinese(pinyin)){
 					$(this).next().text("请填写中文品牌名全拼，如果没有中文品牌则填写英文品牌，全部字母为小写");
@@ -221,11 +225,23 @@
 				}
 			});
 			
+			$("#brandAbbr").blur(function(){
+				brandAbbrFlag = false;
+				
+				var brandAbbr = $.trim($(this).val());
+				if(brandAbbr.length > 150){
+					$(this).next().text("最多输入150个汉字!");
+				}else{
+					brandAbbrFlag = true;
+					$(this).next().text("");
+				}
+			});
+			
 			$('#submitBtn').click(function(){
 				var name = $.trim($("#brandName").val());
 				var ename = $.trim($("#brandEname").val());
 				
-				if(pinyinFlag && storyFlag &&
+				if(brandAbbrFlag && pinyinFlag && storyFlag &&
 						((brandNameFlag && brandEnameFlag) || 
 								(brandNameFlag && (ename==null || ename.length==0)) || 
 								((name==null || name=='') && brandEnameFlag))){

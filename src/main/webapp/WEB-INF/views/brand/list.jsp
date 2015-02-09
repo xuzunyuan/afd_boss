@@ -77,7 +77,7 @@
 			<!-- screening end -->
 			<!-- actionBar -->
 			<div class="actionBar">
-				<input type="button" class="btnA" value="添加品牌" onclick="window.location.href='${ctx}/brand/add?m=32'">
+				<input type="button" class="btnA" value="添加品牌" onclick="window.location.href='${ctx}/brand/add?m=74'">
 				<!-- <div class="pagingMini">
 					<div class="pagingBtn">
 						<a href="javascript:void(0)" class="pageUp disable"></a> <a
@@ -205,7 +205,7 @@
 							buttons : [{text:'确&nbsp;&nbsp;定',classes:'btnB btn-s',click:function(){window.location.href=window.location.href;}}]
 						});
 					}else if(re == -1){
-						$.modaldialog('<p>该品牌已经被申请，不能被删除！</p>',{
+						$.modaldialog('<p>该品牌已经被使用，不能删除！</p>',{
 							title : '品牌不能被删除',
 							buttons : [{text:'确&nbsp;&nbsp;定',classes:'btnB btn-s'}]
 						}); 

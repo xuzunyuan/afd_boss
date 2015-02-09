@@ -34,8 +34,9 @@ import com.afd.common.util.DateUtils;
 import com.afd.common.util.PropertyUtils;
 import com.afd.constants.SystemConstants;
 import com.afd.model.product.Brand;
+import com.afd.model.product.SellerBrand;
 import com.afd.service.product.IBrandService;
-import com.afd.service.product.IProductService;
+import com.afd.service.product.ISellerBrandService;
 import com.afd.staff.model.TStaff;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
@@ -46,7 +47,7 @@ public class BrandController {
 	protected final static Logger logger = LoggerFactory.getLogger(BrandController.class);
 	
 	@Autowired
-	protected IProductService productService;
+	protected ISellerBrandService sellerBrandService;
 	
 	@Autowired
 	protected IBrandService brandService;
@@ -100,9 +101,6 @@ public class BrandController {
 		if (StringUtils.isNotBlank(pageInfo.getConditions().get("status"))) {
 			map.put("status", pageInfo.getConditions().get("status"));
 		}
-		if (StringUtils.isNotBlank(pageInfo.getConditions().get("brandStatus"))) {
-			map.put("brandStatus", pageInfo.getConditions().get("brandStatus"));
-		}
 		if (StringUtils.isNotBlank(pageInfo.getConditions().get("createDate"))) {
 			map.put("createDate", pageInfo.getConditions().get("createDate"));
 		}
@@ -117,6 +115,98 @@ public class BrandController {
 		return "brand/list";
 	}
 	
+	@RequestMapping("/apply")
+	public String getApplyBrandsByPage(HttpServletRequest request){
+		// 处理分页信息
+		PageInfo pageInfo = null;
+		
+		if (request.getParameter("query") != null) { // 查询
+			pageInfo = PageUtils.registerPageInfo(request);
+
+		} else if (request.getParameter("pageNo") != null) { // 分页
+			int pageNo = NumberUtils.toInt(request.getParameter("pageNo"), 1);
+			
+			pageInfo = PageUtils.getPageInfo(request);
+			pageInfo.setPageNo(pageNo);
+		} else {
+			pageInfo = PageUtils.getPageInfo(request);
+
+			if (pageInfo == null) {
+				pageInfo = PageUtils.registerPageInfo(request);
+				pageInfo.getConditions().put("status", SystemConstants.DB_STATUS_VALID); // 默认有效
+				pageInfo.getConditions().put("createDate", "DESC"); // 默认降序
+			}
+		}
+
+		request.setAttribute("pageInfo", pageInfo);
+		
+		// 查询
+		Map<String, Object> map = Maps.newHashMap();
+
+		if (StringUtils.isNotBlank(pageInfo.getConditions().get("brandName"))) {
+			map.put("brandName", pageInfo.getConditions().get("brandName"));
+		}
+		if (StringUtils.isNotBlank(pageInfo.getConditions().get("coName"))) {
+			map.put("coName", pageInfo.getConditions().get("coName").toLowerCase());
+		}
+		if (StringUtils.isNotBlank(pageInfo.getConditions().get("startDt"))) {
+			map.put("startDt", DateUtils.parseDate(pageInfo.getConditions()
+					.get("startDt"), "yyyy-MM-dd"));
+		}
+		if (StringUtils.isNotBlank(pageInfo.getConditions().get("endDt"))) {
+			Date endDt = DateUtils.parseDate(
+					pageInfo.getConditions().get("endDt"), "yyyy-MM-dd");
+
+			endDt = DateUtils.addDay(endDt, 1);
+
+			map.put("endDt", endDt);
+		}		
+		if (StringUtils.isNotBlank(pageInfo.getConditions().get("status"))) {
+			map.put("status", pageInfo.getConditions().get("status"));
+		}
+		if (StringUtils.isNotBlank(pageInfo.getConditions().get("loginName"))) {
+			map.put("loginName", pageInfo.getConditions().get("loginName"));
+		}
+		
+		Page<SellerBrand> sellerBrands = this.sellerBrandService.queryWaitAuditApplyByPage(map, pageInfo.getPageNo());
+		
+		request.setAttribute("sellerBrands", sellerBrands);
+		
+		return "brand/applyList";
+	}
+	
+	@RequestMapping("/applyAudit")
+	@ResponseBody
+	public int auditApply(@RequestParam(value = "sbId") int sellerBrandId, @RequestParam(value = "opinion", required=false) String opinion, 
+			@RequestParam(value = "flag") int flag, HttpServletRequest request){
+		int re = 0;
+		
+		TStaff staff = (TStaff) SecurityUtils.getSubject().getPrincipal();
+		
+		//通过
+		if(flag == 1){
+			re = this.sellerBrandService.passApply(staff.getLoginName(), "审核通过", sellerBrandId);
+		}else if(flag == 2){//驳回
+			re = this.sellerBrandService.rejectApply(staff.getLoginName(), opinion, sellerBrandId);
+		}
+		
+		return re;
+	}
+	
+	@RequestMapping(value="/applyDetail", method=RequestMethod.GET)
+	public String applyDetail(@RequestParam(value = "sbId") int sellerBrandId, Model model){
+		SellerBrand sellerBrand = this.sellerBrandService.getSellerBrandById(sellerBrandId);
+		model.addAttribute("sellerBrand", sellerBrand);
+		if(sellerBrand != null){
+			Brand brand = this.brandService.getByBrandId(sellerBrand.getBrandId().longValue());
+			if(brand != null){
+				model.addAttribute("name", brand.getShowName());
+			}
+		}
+		
+		return "brand/applyDetail";
+	}
+	
 	@RequestMapping(value="add", method=RequestMethod.GET)
 	public String addBrandView(){
 		return "brand/add";
@@ -125,7 +215,7 @@ public class BrandController {
 	@RequestMapping(value="add", method=RequestMethod.POST)
 	public String addBrandSubmit(@ModelAttribute Brand brand,
 			HttpServletRequest request, RedirectAttributes redirectAttributes){
-		String reP = "redirect:/brand/list?m=33";
+		String reP = "redirect:/brand/list?m=75";
 		
 		if(StringUtils.isEmpty(brand.getBrandName()) && StringUtils.isEmpty(brand.getBrandEname()) ||
 				StringUtils.isEmpty(brand.getPinyin()) ||
@@ -162,7 +252,7 @@ public class BrandController {
 	@RequestMapping(value="mod", method=RequestMethod.POST)
 	public String modBrandSubmit(@ModelAttribute Brand brand,
 			HttpServletRequest request, RedirectAttributes redirectAttributes){
-		String reP = "redirect:/brand/list?m=33";
+		String reP = "redirect:/brand/list?m=75";
 		
 		if(StringUtils.isEmpty(brand.getBrandName()) && StringUtils.isEmpty(brand.getBrandEname()) ||
 				StringUtils.isEmpty(brand.getPinyin()) ||
