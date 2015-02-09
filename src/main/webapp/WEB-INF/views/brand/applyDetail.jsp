@@ -35,6 +35,35 @@
 			</div>
 			<form class="form formA">
 				<fieldset>
+					<div class="mod-info">
+						<div class="item">
+							<h2>商家注册信息</h2>
+							<table>
+								<colgroup>
+									<col width="120">
+									<col>
+									<col width="120">
+									<col>
+									<col width="120">
+									<col>
+								</colgroup>
+								<tbody>
+									<tr>
+										<th>商家账号：</th>
+										<td><c:out value="${sellerBrand.loginName}"/></td>
+										<th class="">公司名称：</th>
+										<td class=""><c:out value="${sellerBrand.coName}"/></td>
+									</tr>
+									<tr>
+										<th>申请时间：</th>
+										<td><fmt:formatDate value="${sellerBrand.submitDate}" pattern="yyyy-MM-dd HH:mm:ss" type="both"/></td>
+										<th class="emphasis">状态：</th>
+										<td class="emphasis">待审核</td>
+									</tr>
+								</tbody>
+							</table>
+						</div><!-- item end -->
+					</div>
 					<div class="legend"><h3>品牌申请信息</h3></div>
 					<div class="formBox">
 						<div class="formRow">
@@ -101,6 +130,18 @@
 										<img src="${my:random(imgGetUrl)}${sellerBrand.authCert}&op=s1_w110_h110_e1-c3_w110_h110" alt="">
 										<div class="maskBar"></div>
 										<p class="textBar"><a href="${my:random(imgGetUrl)}${sellerBrand.authCert}" target="_blank">查看大图</a></p>
+									</div>
+								</dd>
+							</dl>
+							<dl class="item">
+								<dt class="item-label">
+									<label>其他资质：</label>
+								</dt>
+								<dd class="item-cont">
+									<div class="mod-pic pic-papers">
+										<img src="${my:random(imgGetUrl)}${sellerBrand.otherCert}&op=s1_w110_h110_e1-c3_w110_h110" alt="">
+										<div class="maskBar"></div>
+										<p class="textBar"><a href="${my:random(imgGetUrl)}${sellerBrand.otherCert}" target="_blank">查看大图</a></p>
 									</div>
 								</dd>
 							</dl>
@@ -180,25 +221,9 @@
 				
 				if(!opinion){
 					$("#opinion").next().text("请填写驳回申请的理由");
-					
-					/* $.modaldialog('<h2><i class="icon i-warns"></i>请填写驳回申请的理由</h2>',{
-						title : '操作确认',
-						buttons : [{text:'确&nbsp;&nbsp;定',classes:'btnB btn-s',click:function(){
-							$("#reject").trigger("click");
-							$('#opinion').focus();}}]
-					}); */
-					 
 					return true;
 				}else if(opinion.length > 150){
 					$("#opinion").next().text("最多可输入150个中文汉字");
-					
-					/* $.modaldialog('<h2><i class="icon i-warns"></i>最多可输入150个中文汉字</h2>',{
-						title : '操作确认',
-						buttons : [{text:'确&nbsp;&nbsp;定',classes:'btnB btn-s',click:function(){
-							$("#reject").trigger("click");
-							$('#opinion').focus();}}]
-					}); */
-					
 					return true;
 				}else{
 					$("#opinion").text("最多可输入150个中文汉字");
