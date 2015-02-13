@@ -40,15 +40,11 @@
 									<div class="select">
 										<select name="orderStatus">
 						            		<option value="-1">全部</option>
-						            		<option <c:if test="${pageInfo.conditions.orderStatus == '1'}">selected="selected"</c:if> value="1">待处理</option>
 						            		<option <c:if test="${pageInfo.conditions.orderStatus == '2'}">selected="selected"</c:if> value="2">等待付款</option>
-						            		<option <c:if test="${pageInfo.conditions.orderStatus == '3'}">selected="selected"</c:if> value="3">等待发货</option>
-						            		<option <c:if test="${pageInfo.conditions.orderStatus == '4'}">selected="selected"</c:if> value="4">已取消</option>
-						            		<option <c:if test="${pageInfo.conditions.orderStatus == '5'}">selected="selected"</c:if> value="5">已发货</option>
-						            		<option <c:if test="${pageInfo.conditions.orderStatus == '6'}">selected="selected"</c:if> value="6">投递失败</option>
-						            		<option <c:if test="${pageInfo.conditions.orderStatus == '7'}">selected="selected"</c:if> value="7">客户拒收</option>
+						            		<option <c:if test="${pageInfo.conditions.orderStatus == '3'}">selected="selected"</c:if> value="3">买家已付款</option>
+						            		<option <c:if test="${pageInfo.conditions.orderStatus == '4'}">selected="selected"</c:if> value="4">交易取消</option>
+						            		<option <c:if test="${pageInfo.conditions.orderStatus == '5'}">selected="selected"</c:if> value="5">商家已发货</option>
 						            		<option <c:if test="${pageInfo.conditions.orderStatus == '8'}">selected="selected"</c:if> value="8">交易完成</option>
-						            		<option <c:if test="${pageInfo.conditions.orderStatus == '9'}">selected="selected"</c:if> value="9">退货中</option>
 						            	</select>
 									</div>
 								</div>
@@ -187,7 +183,7 @@
 				</table>
 			</div>
 			<!-- table end -->
-			<c:if test="${orders.totalPage > 1}">
+			<c:if test="${fn:length(page.result) > 0}">
 			<div class="paging">
 					<p:page page="${orders}" action="${ctx}/order/queryOrder"/>
 			</div>

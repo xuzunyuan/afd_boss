@@ -188,7 +188,7 @@
 				<div class="allList">
 					<dl>
 						<dt>实付款：</dt>
-						<dd><strong class="meg"><fmt:formatNumber value="${order.prodFee+order.deliverFee}" pattern="0.00" />元</strong></dd>
+						<dd><strong class="meg"><fmt:formatNumber value="${order.orderFee}" pattern="0.00" />元</strong></dd>
 					</dl>
 				</div>
 			</div>
