@@ -134,15 +134,17 @@
 			jq.click(function(){
 				hide();
 				
-				var result;
-				if(self.param){
-					result = self.click.call(this, self.param);
-				}else{
-					result = self.click.call(this);
-				}
-				if(result){
-					dialog$.show();
-					$('#mask').show();
+				if(self.click){
+					var result;
+					if(self.param){
+						result = self.click.call(this, self.param);
+					}else{
+						result = self.click.call(this);
+					}
+					if(result){
+						dialog$.show();
+						$('#mask').show();
+					}
 				}
 			});
 		});
