@@ -115,12 +115,16 @@
 								</dd>
 							</dl>
 						</fieldset>
-						<div class="formBtn">
+					<div class="formBtn">
 						<button type="button" class="btnC" onclick="product.downProduct(${p.prodId})">抽样下架</button>
+						<c:if test="${p.auditStatus =='1' }">
+							<input type="button" class="btn" onclick="product.auditPass(${p.prodId})" value="审核通过" />
+						</c:if>
 					</div>
 					</form>
 			
 					<!-- table -->
+					<c:if test="${!empty p.lastAuditName}">
 					<table class="table tableC">
 						<colgroup>
 							<col>
@@ -145,43 +149,11 @@
 							</tr>
 						</tbody>
 					</table>
+					</c:if>
 					<!-- table end -->
 				</div>
 			</div>
-			<!-- main end -->
-			<!-- bd end -->
-<!-- 		<div class="pop">
-		<div class="hd">
-			<h1>操作确认</h1>
-			<span><i class="icon i-close" title="关闭"></i></span>
-		</div>
-		<div class="bd">
-			<div class="pop-con">
-				<dl>
-					<dt><label><em>*</em>驳回理由：</label></dt>
-					<dd>
-						<div class="select">
-							<select>
-								<option>真实姓名与身份证不符</option>
-							</select>
-						</div>
-					</dd>
-				</dl>
-				<dl>
-					<dt><label><em>*</em>描述：</label></dt>
-					<dd>
-						<textarea name="" id="" rows="5"></textarea>
-						<div class="hint popHint">最多可输入150个中文汉字</div>
-					</dd>
-				</dl>
-			</div>
-			<div class="formBtn">
-				<input type="button" value="确 定" class="btnB btn-s">
-				<input type="button" value="取 消" class="btn btn-s">
-			</div>
-		</div>
-	</div>
-	<div class="mask"></div> -->
+
 <script type="text/javascript" src="../static/js/product.js?t=2014071601"></script>
 <script type="text/javascript" src="../static/js/jquery.md.js?t=2014071601"></script>
 <script type="text/javascript" src="${ctx}/static/js/jquery-foxibox-0.2_c.js?t=20140703" ></script>
@@ -228,7 +200,7 @@
 						"</li> ";
 				}
 			}
-			specbody += "<td>&yen;"+${s.salePrice }+"</td><td>&yen;"+${s.marketPrice }+"</td><td>"+${s.stockBalance }+"</td><td>"+${s.sellerNo }+"</td></tr><tr>";
+			specbody += "<td>&yen;"+${s.salePrice }+"</td><td>&yen;"+${s.marketPrice }+"</td><td>"+${s.stockBalance }+"</td><td>"+${s.sellerNo } +"</td></tr><tr>";
 			
 			
 		</c:forEach>

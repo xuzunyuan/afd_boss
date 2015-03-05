@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.afd.common.mybatis.Page;
 import com.afd.common.util.DateUtils;
+import com.afd.constants.product.ProductConstants;
 import com.afd.model.product.BaseCategory;
 import com.afd.model.product.Product;
 import com.afd.model.product.Sku;
@@ -63,6 +64,42 @@ public class ProductController {
 	
 	/**
 	 * 
+	 * @return 商品审核列表
+	 */
+	@RequestMapping(value = "/product/productAudit")
+	public String toAuditProductPage(
+			@ModelAttribute ProductCondition productCondition,
+			HttpServletRequest request, Page<Product> page, ModelMap modelMap
+			) {
+		page.setPageSize(20);
+		
+		Date endDate = productCondition.getEndDate();
+		if(null != endDate){
+			String strEndDate = DateUtils.formatDate(endDate, "yyyy-MM-dd");
+			endDate = DateUtils.parseDate(strEndDate + " 23:59:59");
+			productCondition.setEndDate(endDate);
+		}
+		productCondition.setStatus(ProductConstants.PROD_STATUS_DOWN);
+		productCondition.setAuditStatus(ProductConstants.PROD_AUDIT_STATUS_WAIT);
+		page = productService.searchProductByConditionPage(productCondition, null, null, page);
+		List<Product> list = page.getResult();
+		if(null != list && !list.isEmpty()){
+			for (Product p : list) {
+				BaseCategoryInfoVO bc = this.categoryService.getBaseCategoryInfoByBcId(p.getBcId());
+				String displayBcName = bc.getPathName().trim().replace("|", "/");
+				p.setBcName(displayBcName +"/"+ bc.getBcName());
+				Seller seller = sellerService.getSellerById(p.getSellerId());
+				p.setCoName(seller.getCoName());
+			}
+		}
+		
+		modelMap.addAttribute("page", page);
+		return "/product/productAudit";
+	}
+	
+	
+	/**
+	 * 
 	 * @return 商品列表
 	 */
 	@RequestMapping(value = "/product/productList")
@@ -98,15 +135,29 @@ public class ProductController {
 	}
 	
 	/**
+	 *  ajax调用：审核通过
+	 * @param prodId
+	 * @return
+	 */
+	@RequestMapping(value = "/product/auditPass")
+	@ResponseBody
+	public boolean doDownawayProduct(@RequestParam(value = "prodId", required = true) Integer prodId){
+		TStaff currentStaff = (TStaff) SecurityUtils.getSubject().getPrincipal();
+		String loginName = currentStaff.getLoginName();
+		return productService.auditProduct(prodId, ProductConstants.PROD_AUDIT_STATUS_PASS, null, loginName);
+	}
+
+	
+	/**
 	 *  ajax调用：抽样下架
 	 * @param prodId
 	 * @return
 	 */
-	@RequestMapping(value = "/product/doDownaway")
+	@RequestMapping(value = "/product/downProduct")
 	@ResponseBody
-	public boolean doDownawayProduct(@RequestParam(value = "prodId", required = true) Integer prodId,
-			@RequestParam(value = "auditStatus", required = false) String auditStatus,
-			@RequestParam(value = "auditContent", required = false) String auditContent){
+	public boolean doDownProduct(@RequestParam(value = "prodId", required = true) Integer prodId,
+			@RequestParam(value = "auditStatus", required = true) String auditStatus,
+			@RequestParam(value = "auditContent", required = true) String auditContent){
 		TStaff currentStaff = (TStaff) SecurityUtils.getSubject().getPrincipal();
 		String loginName = currentStaff.getLoginName();
 		
@@ -118,11 +169,11 @@ public class ProductController {
 	 * @param ids
 	 * @return
 	 */
-	@RequestMapping(value="/product/batchDownaway",method = RequestMethod.POST) 
+	@RequestMapping(value="/product/batchDownProduct",method = RequestMethod.POST) 
 	@ResponseBody
-	public boolean batchUpdateStatus(@RequestParam(value = "ids", required=true) String ids,
+	public boolean doBatchDownProduct(@RequestParam(value = "ids", required=true) String ids,
 			@RequestParam(value = "auditStatus", required = true) String auditStatus,
-			@RequestParam(value = "auditContent", required = false) String auditContent){
+			@RequestParam(value = "auditContent", required = true) String auditContent){
 		TStaff currentStaff = (TStaff) SecurityUtils.getSubject().getPrincipal();
 		String loginName = currentStaff.getLoginName();
 		List<Integer> idList = new ArrayList<Integer>();

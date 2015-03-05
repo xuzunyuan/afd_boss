@@ -48,37 +48,6 @@
 										<input type="text" class="txt textA" name="brandName" value="<c:out value="${productCondition.brandName}"/>" />
 									</div>
 								</li>
-							
-								<%-- <li class="item">
-									<div class="item-label"><label>商家名称：</label></div>
-									<div class="item-cont">
-										<input type="text" class="txt textA" name="sellerName" value="<c:out value="${productCondition.sellerName}"/>" />
-									</div>
-								</li>
-								<li class="item">
-									<div class="item-label"><label>品牌：</label></div>
-									<div class="item-cont">
-										<div class="select">
-											<select>
-											    <option>请选择</option>
-											</select>
-										</div>
-									</div>
-								</li> --%>
-								<li class="item">
-									<div class="item-label"><label>商品状态：</label></div>
-									<div class="item-cont">
-										<div class="select">
-											<select name="status">
-											    <option value="">全部</option>
-											    <option <c:if test="${productCondition.status == '0'}">selected="selected"</c:if> value="0">在售</option>
-											    <option <c:if test="${productCondition.status == '1'}">selected="selected"</c:if> value="1">下架</option>
-											    <option <c:if test="${productCondition.status == '2'}">selected="selected"</c:if> value="2">已删除</option>
-											    <option <c:if test="${productCondition.status == '3'}">selected="selected"</c:if> value="3">暂停销售</option>
-											</select>
-										</div>
-									</div>
-								</li>
 							</ul>
 						</fieldset>
 						<!-- foldbarH -->
@@ -90,26 +59,26 @@
 					</form>
 				</div>
 				<!-- screening end -->
-				<!-- actionBar -->
+				<!-- actionBar 
 				<div class="actionBar">
-	 			<input type="checkbox" class="chk" name="allSelect" id="allSelect"  value=""  onclick="product.allSelect(this)" /><label for="allSelect">全选</label>
-					<input type="button" class="btnA" onclick="product.batchDownProduct()" value="抽样下架" /> 
-		<!--		 	<div class="pagingMini">
+	 			<input type="checkbox" class="chk" name="allSelect" id="allSelect" /><label for="allSelect">全选</label>
+					<input type="button" class="btnA" value="抽样下架" /> 
+				 	<div class="pagingMini">
 						<div class="pagingBtn">
 							<a href="javascript:void(0)" class="pageUp disable"></a>
 							<a href="#" class="pageDown"></a>
 						</div>
 						<div class="pageNum"><span><b>1</b></span>/<span>20</span>页</div>
 						<div class="count">共<em>23145</em>条记录，本页显示<em>20</em>条</div>
-					</div> -->
-				</div>
-				<!-- actionBar end -->
+					</div> 
+				</div> 
+				 -->
 				<!-- table -->
 				<div class="tableWrap">
 					<table class="table tableA">
 						<colgroup>
-						 	<col width="20" />
-							<col width="30" />
+						 <!-- 	<col width="20" /> -->
+							<col width="50" />
 							<col width="100" />
 							<col />
 							<col width="75" />
@@ -123,7 +92,7 @@
 						</colgroup>
 						<thead>
 							<tr>
-								<th></th> 
+							<!-- 	<th></th>  -->
 								<th>序号</th>
 								<th>商品编码</th>
 								<th>商品名称</th>
@@ -140,7 +109,7 @@
 						<tbody>
 							<c:forEach items="${requestScope.page.result}" var="p" varStatus="var">
 							<tr>
-							 	<td class="chkbox"><input type="checkbox" class="chk" name="row_checkbox" value="${p.prodId }" /></td>
+							 	<!-- <td class="chkbox"><input type="checkbox" class="chk" name="" id="" value="" /></td> -->
 								<td>${var.count }</td>
 								<th>${p.prodId }</th>
 								<td class="align-l"><a href="#"><c:out value="${p.title }"></c:out> </a></td>
@@ -199,7 +168,6 @@
 	<script type="text/javascript">
 	$(document).ready(function(){
 		product = new product();
-		
 	});
 	</script>
 </body>
