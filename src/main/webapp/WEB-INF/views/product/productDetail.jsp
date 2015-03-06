@@ -116,10 +116,15 @@
 							</dl>
 						</fieldset>
 					<div class="formBtn">
-						<button type="button" class="btnC" onclick="product.downProduct(${p.prodId})">抽样下架</button>
-						<c:if test="${p.auditStatus =='1' }">
-							<input type="button" class="btn" onclick="product.auditPass(${p.prodId})" value="审核通过" />
-						</c:if>
+						<c:choose>
+							<c:when test="${p.auditStatus == '0' }">
+								<button type="button" class="btnC" onclick="product.downProduct(${p.prodId})">抽样下架</button>
+							</c:when>
+							<c:when test="${p.auditStatus == '1' }">
+								<button type="button" class="btnC" onclick="product.auditPass(${p.prodId})">审核通过</button>
+								<input type="button" class="btn" onclick="product.downProduct(${p.prodId})" value="驳回申请" />
+							</c:when>
+						</c:choose>
 					</div>
 					</form>
 			
@@ -160,6 +165,8 @@
 <script type="text/javascript">
 	$(function(){
 		product = new product();
+	
+		var attrIds = '${p.attrValueId}';
 		
 		var attrs = '${p.attrValueName}';
 		attrArray = attrs.split('|||');
@@ -167,13 +174,12 @@
 		$.each(attrArray,function(){
 			attr = this.replace(/,,,/g, ', ');
 			attr = attr.split(':::');
-			html += '<dl class="item"><dt class="item-label"><label>'+attr[0]+'：</label></dt><dd class="item-cont"><p>'+attr[1]+'</p></dd></dl>';
+			var jq = $('<dl class="item"><dt class="item-label"><label>'+attr[0]+'：</label></dt><dd class="item-cont"><p>'+attr[1]+'</p></dd></dl>');
+			jq.appendTo('#attr');
 		});
-		$('#attr').append(html);
-		
 		
 		var skus = '${skus }';
-		var spechead = '',specbody='<tr>',skuImg='';
+		var spechead = '',specbody='<tr>',skuImg='',tmp_spec = "";;
  		<c:forEach items="${skus }" var="s" varStatus="var">
 			skuSpec = '${s.skuSpecName}';
 			skuSpecArr = skuSpec.split('|||');
@@ -184,30 +190,32 @@
 				}
 			}
 			
-			for(var i = 0;i< skuSpecArr.length;i++){
-				var specs = skuSpecArr[i].split(':::');
+			$.each(skuSpecArr,function(index){
+				var specs = this.split(':::');
 				specbody += "<td>"+specs[1] +"</td>";
 				
-				if(i == 0){
-					skuImg += 
-						"<li>"+
+				if(index == 0){
+					var jq = $("<li>"+
 							"<div class=\"mod-pic\">"+
-								"<img src=\"${my:random(imgGetUrl)}${s.skuImgUrl}\" alt=\"\" />"+
-								"<div class=\"maskBar\"></div>"+
-								"<p class=\"textBar\"><a id=\"look\" href=\"${my:random(imgGetUrl)}${s.skuImgUrl}\">查看大图</a></p>"+
-							"</div>"+
-							"<p>"+specs[0]+"："+specs[1]+"</p>"+
-						"</li> ";
+							"<img src=\"${my:random(imgGetUrl)}${s.skuImgUrl}\" alt=\"\" />"+
+							"<div class=\"maskBar\"></div>"+
+							"<p class=\"textBar\"><a id=\"look\" href=\"${my:random(imgGetUrl)}${s.skuImgUrl}\">查看大图</a></p>"+
+						"</div>"+
+						"<p>"+specs[0]+"："+specs[1]+"</p>"+
+					"</li> ");
+					
+					if(tmp_spec != specs[1]){
+						jq.appendTo('#skuImg');
+						tmp_spec = specs[1];
+					}
 				}
-			}
+			});
+			
 			specbody += "<td>&yen;"+${s.salePrice }+"</td><td>&yen;"+${s.marketPrice }+"</td><td>"+${s.stockBalance }+"</td><td>"+${s.sellerNo } +"</td></tr><tr>";
-			
-			
 		</c:forEach>
 		spechead +="<td>单价</td><td>特卖价</td><td>数量</td><td>商家编号</td>"
 		$('#specthead').append(spechead);	
 		$('#specbody').append(specbody);	
-		$('#skuImg').append(skuImg);	
 		
 		$("a#look").foxibox();
 	});
