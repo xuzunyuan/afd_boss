@@ -29,9 +29,9 @@
 							<li class="item">
 								<div class="item-label"><label>下单时间：</label></div>
 								<div class="item-cont">
-									<input type="text" readonly="readonly" value="<fmt:formatDate value="${pageInfo.conditions.startDt}" pattern="yyyy-MM-dd" />" name="startDt" class="dateTxt" onClick="WdatePicker()" />
+									<input type="text" readonly="readonly" value="${pageInfo.conditions.startDt}" name="startDt" class="dateTxt" onClick="WdatePicker()" />
 			            			<span> 至 </span>
-			            			<input type="text" readonly="readonly" value="<fmt:formatDate value="${pageInfo.conditions.endDt}" pattern="yyyy-MM-dd" />" name="endDt" class="dateTxt" onClick="WdatePicker()" />
+			            			<input type="text" readonly="readonly" value="${pageInfo.conditions.endDt}" name="endDt" class="dateTxt" onClick="WdatePicker()" />
 								</div>
 							</li>
 							<li class="item">
@@ -183,7 +183,7 @@
 				</table>
 			</div>
 			<!-- table end -->
-			<c:if test="${fn:length(page.result) > 0}">
+			<c:if test="${fn:length(orders.result) > 0}">
 			<div class="paging">
 					<p:page page="${orders}" action="${ctx}/order/queryOrder"/>
 			</div>

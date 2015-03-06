@@ -32,9 +32,12 @@ import com.afd.constants.order.OrderConstants;
 import com.afd.model.order.Order;
 import com.afd.model.order.OrderItem;
 import com.afd.model.order.ReturnOrder;
+import com.afd.model.product.BrandShow;
+import com.afd.model.seller.SellerRetAddress;
 import com.afd.service.order.IOrderService;
 import com.afd.service.order.IRetOrderService;
 import com.afd.service.product.IBrandShowService;
+import com.afd.service.seller.ISellerService;
 import com.afd.staff.model.TStaff;
 import com.google.common.collect.Maps;
 
@@ -48,6 +51,8 @@ public class OrderController {
 	private IRetOrderService retOrderService;
 	@Autowired
 	private IBrandShowService brandShowService;
+	@Autowired
+	private ISellerService sellerService;
 	
 	/**
 	 * @return 0:失败,1:成功
@@ -246,6 +251,11 @@ public class OrderController {
 			modelMap.addAttribute("returnOrder", retOrder);
 			
 			//退货地址
+			BrandShow brandShow = this.brandShowService.getBrandShowById(retOrder.getBrandShowId().intValue());
+			if(brandShow!=null && brandShow.getsRAId()>0){
+				SellerRetAddress retAddr = this.sellerService.getSellerRetAddress(brandShow.getsRAId());
+				modelMap.addAttribute("retAddr", retAddr);
+			}
 		}
 		
 		return "order/refundDetail";

@@ -80,7 +80,26 @@
 						<tbody>
 							<tr>
 								<th>退货地址：</th>
-								<td colspan="3">天津 滨海新区 城区 西环路恒圆魏都小区52号商铺，    收件人：林子，     手机：18690689979</td>
+								<td colspan="3">
+									<c:if test="${not empty retAddr}">
+									<c:out value="${retAddr.provinceName}"></c:out>
+									<c:out value="${retAddr.cityName}"></c:out>
+									<c:out value="${retAddr.districtName}"></c:out>
+									<c:out value="${retAddr.townName}"></c:out>
+									<c:out value="${retAddr.addr}"></c:out>，     收件人：<c:out value="${retAddr.receiver}" />，     手机：
+									<c:choose>
+										<c:when test="${not empty retAddr.mobile and not empty retAddr.tel}">
+											<span>${retAddr.mobile}</span>/<span>${order.tel}</span>
+										</c:when>
+										<c:when test="${retAddr.mobile != ''}">
+											<span>${retAddr.mobile}</span>
+										</c:when>
+										<c:otherwise>
+											<span>${retAddr.tel}</span>
+										</c:otherwise>
+									</c:choose>
+									</c:if>
+								</td>
 							</tr>
 						</tbody>
 					</table>
