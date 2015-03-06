@@ -136,9 +136,9 @@
 								<td class="t-operate">
 									<div class="mod-operate">
 										<div class="def"><a href="${ctx }/product/productDetail?prodId=${p.prodId }" >查看详情</a><i class="arr"></i></div>
-										<ul>
+										<%-- <ul>
 											<li><a href="javascript:;" onclick="product.downProduct(${p.prodId})">抽样下架</a></li>
-										</ul>
+										</ul> --%>
 									</div>
 								</td>
 							</tr>
