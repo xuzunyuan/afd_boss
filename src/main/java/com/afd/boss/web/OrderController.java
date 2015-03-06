@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -27,39 +28,31 @@ import com.afd.boss.util.PageUtils;
 import com.afd.boss.util.PageUtils.PageInfo;
 import com.afd.common.mybatis.Page;
 import com.afd.common.util.DateUtils;
+import com.afd.constants.order.OrderConstants;
 import com.afd.model.order.Order;
 import com.afd.model.order.OrderItem;
-import com.afd.service.order.ICartService;
+import com.afd.model.order.ReturnOrder;
 import com.afd.service.order.IOrderService;
-import com.afd.service.seller.ISellerService;
-import com.afd.service.user.IAddressService;
-import com.afd.service.user.IUserService;
+import com.afd.service.order.IRetOrderService;
+import com.afd.service.product.IBrandShowService;
 import com.afd.staff.model.TStaff;
 import com.google.common.collect.Maps;
 
 @Controller
-@RequestMapping("/order")
 public class OrderController {
 	protected static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 	
 	@Autowired
 	private IOrderService orderService;
-	
 	@Autowired
-	private IAddressService addressService;
+	private IRetOrderService retOrderService;
 	@Autowired
-	private IUserService userService;
-	@Autowired
-	private ISellerService sellerService;
-	@Autowired
-	private IAddressService addrService;
-	@Autowired
-	private ICartService cartService;
+	private IBrandShowService brandShowService;
 	
 	/**
 	 * @return 0:失败,1:成功
 	 */
-	@RequestMapping("/cancelOrders")
+	@RequestMapping("/order/cancelOrders")
 	@ResponseBody
 	public int cancelOrders(@RequestParam String cancelReason, @RequestParam Long... orderIds){
 		int re = 0;
@@ -74,7 +67,7 @@ public class OrderController {
 		return re;
 	}
 	
-	@RequestMapping("/queryOrder")
+	@RequestMapping("/order/queryOrder")
 	public String queryOrders(HttpServletRequest request){
 		// 处理分页信息
 		PageInfo pageInfo = null;
@@ -140,7 +133,7 @@ public class OrderController {
 		return "order/queryOrder";
 	}
 	
-	@RequestMapping("/orderDetail")
+	@RequestMapping("/order/orderDetail")
 	public String orderDetail(@RequestParam Long orderId, ModelMap modelMap){
 		Order order = this.orderService.getOrderById(orderId);
 		
@@ -191,5 +184,87 @@ public class OrderController {
 		}
 		
 		return "order/orderDetail";
+	}
+	
+	@RequestMapping("/amt/back")
+	public String refundList(HttpServletRequest request){
+		// 处理分页信息
+		PageInfo pageInfo = null;
+		
+		if (request.getParameter("query") != null) { // 查询
+			pageInfo = PageUtils.registerPageInfo(request);
+
+		} else if (request.getParameter("pageNo") != null) { // 分页
+			int pageNo = NumberUtils.toInt(request.getParameter("pageNo"), 1);
+			
+			pageInfo = PageUtils.getPageInfo(request);
+			pageInfo.setPageNo(pageNo);
+		} else {
+			pageInfo = PageUtils.getPageInfo(request);
+
+			if (pageInfo == null) {
+				pageInfo = PageUtils.registerPageInfo(request);
+			}
+		}
+
+		request.setAttribute("pageInfo", pageInfo);
+		
+		// 查询
+		Map<String, Object> cond = Maps.newHashMap();
+
+		if (StringUtils.isNotBlank(pageInfo.getConditions().get("brandShowTitle"))) {
+			cond.put("brandShowTitle", pageInfo.getConditions().get("brandShowTitle"));
+		}
+		if (StringUtils.isNotBlank(pageInfo.getConditions().get("retOrderCode"))) {
+			cond.put("retOrderCode", pageInfo.getConditions().get("retOrderCode"));
+		}
+		if (StringUtils.isNotBlank(pageInfo.getConditions().get("startDate"))) {
+			cond.put("startDate", DateUtils.parseDate(pageInfo.getConditions().get("startDate"), "yyyy-MM-dd"));
+		}
+		if (StringUtils.isNotBlank(pageInfo.getConditions().get("endDate"))) {
+			String strEndDate = pageInfo.getConditions().get("endDate")+" 23:59:59";
+			cond.put("endDate", DateUtils.parseDate(strEndDate));
+		}		
+		 
+		//确认收到货
+		cond.put("status", OrderConstants.order_return_comfirm);
+		
+		Page<ReturnOrder> retOrders = new Page<>();
+		retOrders.setCurrentPageNo(pageInfo.getPageNo());	
+		
+		retOrders = this.retOrderService.getRetOrdersByPage(cond, retOrders);
+		
+		request.setAttribute("retOrders", retOrders);
+		
+		return "order/refundOrder";
+	}
+	
+	@RequestMapping("/amt/refundDetail")
+	public String refundDetail(@RequestParam Long retOrderId, ModelMap modelMap){
+		if(retOrderId!=null && retOrderId>0){
+			ReturnOrder retOrder = this.retOrderService.getRetOrderInfoByRetOrderId(retOrderId);
+			modelMap.addAttribute("returnOrder", retOrder);
+			
+			//退货地址
+		}
+		
+		return "order/refundDetail";
+	}
+	
+	@RequestMapping(value="/amt/refund", method=RequestMethod.POST)
+	@ResponseBody
+	public int modRetOrder(@RequestParam(value = "retOrderId") Long retOrderId, HttpServletRequest request){
+		int re = 0;
+		
+		if(retOrderId!=null && retOrderId>0){
+			ReturnOrder retOrder = new ReturnOrder();
+			retOrder.setRetOrderId(retOrderId);		
+			retOrder.setStatus(OrderConstants.order_return_refund);
+			retOrder.setRefundDate(new Date());
+			
+			re = this.retOrderService.updateRetOrderByIdSelective(retOrder);
+		}
+		
+		return re;
 	}
 }
