@@ -37,7 +37,7 @@ import com.afd.model.seller.SellerRetAddress;
 import com.afd.service.order.IOrderService;
 import com.afd.service.order.IRetOrderService;
 import com.afd.service.product.IBrandShowService;
-import com.afd.service.seller.ISellerService;
+import com.afd.service.seller.ISellerRetAddrService;
 import com.afd.staff.model.TStaff;
 import com.google.common.collect.Maps;
 
@@ -52,7 +52,7 @@ public class OrderController {
 	@Autowired
 	private IBrandShowService brandShowService;
 	@Autowired
-	private ISellerService sellerService;
+	private ISellerRetAddrService sellerRetAddressService;
 	
 	/**
 	 * @return 0:失败,1:成功
@@ -108,9 +108,7 @@ public class OrderController {
 			cond.put("startDt", DateUtils.parseDate(pageInfo.getConditions().get("startDt"), "yyyy-MM-dd"));
 		}
 		if (StringUtils.isNotBlank(pageInfo.getConditions().get("endDt"))) {
-			Date endDt = DateUtils.parseDate(pageInfo.getConditions().get("endDt"), "yyyy-MM-dd");
-			endDt = DateUtils.addDay(endDt, 1);
-			cond.put("endDt", endDt);
+			cond.put("endDt", DateUtils.parseDate(pageInfo.getConditions().get("endDt")+" 23:59:59"));
 		}		
 		if (StringUtils.isNotBlank(pageInfo.getConditions().get("payStatus"))) {
 			cond.put("payStatus", pageInfo.getConditions().get("payStatus"));
@@ -253,7 +251,7 @@ public class OrderController {
 			//退货地址
 			BrandShow brandShow = this.brandShowService.getBrandShowById(retOrder.getBrandShowId().intValue());
 			if(brandShow!=null && brandShow.getsRAId()>0){
-				SellerRetAddress retAddr = this.sellerService.getSellerRetAddress(brandShow.getsRAId());
+				SellerRetAddress retAddr = this.sellerRetAddressService.getAddrById(brandShow.getsRAId());
 				modelMap.addAttribute("retAddr", retAddr);
 			}
 		}
