@@ -130,12 +130,11 @@
 				
 			</div>
 			<div class="pagingWrap">
-				<p:page page="${applysPage}" action="${ctx}/seller/audit"/>
+				<p:page page="${applysPage}" action="${ctx}/brandShow/auditList"/>
+			</div>
 		</div>
 		<!-- paging end -->
 	</div>
 	<!-- goodsList end -->
-	
-
 </body>
 </html>
