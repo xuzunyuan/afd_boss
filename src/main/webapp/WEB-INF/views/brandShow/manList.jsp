@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<title>专场审核-阿凡达</title>
+<title>专场管理-阿凡达</title>
 </head>
 <body>
 
@@ -21,7 +21,7 @@
 <div class="goodsauditList">
 	<!-- screening -->
 	<div class="screening">
-		<form class="form" method="post" action="${ctx}/brandShow/auditList" id="queryFrm">
+		<form class="form" method="post" action="${ctx}/brandShow/manList" id="queryFrm">
 			<fieldset class="">
 				<legend><h3>查询条件</h3></legend>
 				<ul class="formBox">
@@ -29,6 +29,25 @@
 						<div class="item-label"><label>申请时间：</label></div>
 						<div class="item-cont"><input type="text" class="dateTxt" onfocus="WdatePicker()" name="startDt" value="${pageInfo.conditions.startDt}"/><span>至</span><input type="text" class="dateTxt" onfocus="WdatePicker()" name="endDt" value="${pageInfo.conditions.endDt}"/></div>
 					</li>
+					<li class="item">
+						<div class="item-label"><label>状态：</label></div>
+						<div class="item-cont">
+							<div class="select">
+								<select name="status">
+								    <option value="">全部</option>
+								    <option value="1" ${pageInfo.conditions.status == '1' ? 'selected="selected"' : ''}>进行中</option>
+								    <option value="2" ${pageInfo.conditions.status == '2' ? 'selected="selected"' : ''}>结束</option>
+								    <option value="3" ${pageInfo.conditions.status == '3' ? 'selected="selected"' : ''}>异常终止</option>
+								    <option value="4" ${pageInfo.conditions.status == '4' ? 'selected="selected"' : ''}>编辑中</option>
+								    <option value="5" ${pageInfo.conditions.status == '5' ? 'selected="selected"' : ''}>待审核</option>
+								    <option value="6" ${pageInfo.conditions.status == '6' ? 'selected="selected"' : ''}>审核中</option>
+								    <option value="7" ${pageInfo.conditions.status == '7' ? 'selected="selected"' : ''}>等待上线</option>
+								    <option value="8" ${pageInfo.conditions.status == '8' ? 'selected="selected"' : ''}>驳回</option>
+								</select>
+							</div>
+						</div>
+					</li>
+					
 					<li class="item">
 						<div class="item-label"><label>品牌名称：</label></div>
 						<div class="item-cont">
@@ -58,19 +77,6 @@
 		</form>
 	</div>
 	<!-- screening end -->
-	
-	<!-- hintbar -->
-	<div class="hintBar hintBar-lamp">
-		<dl>
-			<dt><i class="icon i-lamp"></i></dt>
-			<dd>
-				<ul>
-					<li></i>该列表目前只显示等待审核的专场申请！</li>
-				</ul>
-			</dd>
-		</dl>
-	</div>
-	<!-- hintbar end -->
 
 	<!-- table -->
 	<div class="tableWrap">
@@ -112,10 +118,20 @@
 						<th><c:out value="${brandShow.brandName}"/></th>
 						<td><c:out value="${brandShow.coName}"/></td>
 						<td><p><fmt:formatDate value="${brandShow.createByDate}" pattern="yyyy-MM-dd HH:mm:ss"/></p></td>
-						<td>待审核</td>
+						<td><c:choose>
+								<c:when test="${brandShow.status == '1'}">进行中</c:when>
+								<c:when test="${brandShow.status == '2'}">结束</c:when>
+								<c:when test="${brandShow.status == '3'}">异常终止</c:when>
+								<c:when test="${brandShow.status == '4'}">编辑中</c:when>
+								<c:when test="${brandShow.status == '5'}">待审核</c:when>
+								<c:when test="${brandShow.status == '6'}">审核中</c:when>
+								<c:when test="${brandShow.status == '7'}">等待上线</c:when>
+								<c:when test="${brandShow.status == '8'}">驳回</c:when>	
+							</c:choose>			
+						</td>
 						<td class="t-operate">
 							<div class="mod-operate">
-								<div class="def"><a href="auditPage?brandShowId=${brandShow.brandShowId}">审核申请</a><i class="arr"></i></div>
+								<div class="def"><a href="manPage?brandShowId=${brandShow.brandShowId}">查看详情</a><i class="arr"></i></div>
 								<ul>									
 								</ul>
 							</div>
@@ -131,7 +147,7 @@
 		<div class="ctrlArea">
 		</div>
 		<div class="pagingWrap">
-			<p:page page="${brandShowPage}" action="${ctx}/brandShow/auditList"/>
+			<p:page page="${brandShowPage}" action="${ctx}/brandShow/manList"/>
 		</div>
 	</div>
 	<!-- paging end -->
