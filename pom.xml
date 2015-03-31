@@ -12,7 +12,9 @@
 		<relativePath>../afd_parent</relativePath>
 		<version>1.0</version>
 	</parent>
-	
+	<build>
+		<finalName>afd_boss</finalName>
+	</build>
 	<dependencies>
 		<dependency>
 			<groupId>com.afd.service</groupId>
