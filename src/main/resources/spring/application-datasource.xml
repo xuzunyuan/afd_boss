@@ -49,7 +49,7 @@
 		</bean>		
 	</beans>
 		<beans profile="product">
-		<bean id="ds" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close"> 
+		<bean id="dataSource_staff" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close"> 
 		    <!-- 基本属性 url、user、password -->
 		    <property name="driverClassName" value="com.alibaba.cobar.jdbc.Driver" /> 
 		    <property name="url" value="${product.jdbc.url}" />
