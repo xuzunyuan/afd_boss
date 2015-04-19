@@ -55,7 +55,7 @@
 		    <property name="url" value="${product.jdbc.url}" />
 		    <property name="username" value="${product.jdbc.user}" />
 		    <property name="password" value="${product.jdbc.pwd}" />
-		    <property name="connectionProperties" value="config.decrypt=false" />
+		    <property name="connectionProperties" value="config.decrypt=true" />
 		      
 		    <!-- 配置初始化大小、最小、最大 -->
 		    <property name="initialSize" value="5" />
