@@ -135,7 +135,7 @@
 													<img src="../static/img/order_02.jpg" alt="" >
 												</c:when>
 												<c:otherwise>
-													<img src="${my:random(imgGetUrl)}${sellerBrand.logoUrl}&op=s1_w50_h50" alt="" >
+													<img src="${my:random(imgGetUrl)}${sellerBrand.logoUrl}&op=s2_w50_h50" alt="" >
 												</c:otherwise>
 											</c:choose>
 										</td> 

@@ -115,7 +115,7 @@
 								</dt>
 								<dd class="item-cont">
 									<div class="mod-pic pic-papers">
-										<img src="${my:random(imgGetUrl)}${sellerBrand.trademarkCert}&op=s1_w110_h110" alt="">
+										<img src="${my:random(imgGetUrl)}${sellerBrand.trademarkCert}&op=s2_w110_h110" alt="">
 										<div class="maskBar"></div>
 										<p class="textBar"><a href="${my:random(imgGetUrl)}${sellerBrand.trademarkCert}" target="_blank">查看大图</a></p>
 									</div>
@@ -127,7 +127,7 @@
 								</dt>
 								<dd class="item-cont">
 									<div class="mod-pic pic-papers">
-										<img src="${my:random(imgGetUrl)}${sellerBrand.authCert}&op=s1_w110_h110" alt="">
+										<img src="${my:random(imgGetUrl)}${sellerBrand.authCert}&op=s2_w110_h110" alt="">
 										<div class="maskBar"></div>
 										<p class="textBar"><a href="${my:random(imgGetUrl)}${sellerBrand.authCert}" target="_blank">查看大图</a></p>
 									</div>
@@ -139,7 +139,7 @@
 								</dt>
 								<dd class="item-cont">
 									<div class="mod-pic pic-papers">
-										<img src="${my:random(imgGetUrl)}${sellerBrand.otherCert}&op=s1_w110_h110" alt="">
+										<img src="${my:random(imgGetUrl)}${sellerBrand.otherCert}&op=s2_w110_h110" alt="">
 										<div class="maskBar"></div>
 										<p class="textBar"><a href="${my:random(imgGetUrl)}${sellerBrand.otherCert}" target="_blank">查看大图</a></p>
 									</div>

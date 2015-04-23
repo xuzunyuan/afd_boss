@@ -142,7 +142,7 @@
 												<img id="logoImg" src="../static/img/bramLogo.jpg" alt="" >
 											</c:when>
 											<c:otherwise>
-												<img id="logoImg" src="${my:random(imgGetUrl)}${brand.logoUrl}&op=s1_w400_h200" alt="" >
+												<img id="logoImg" src="${my:random(imgGetUrl)}${brand.logoUrl}&op=s2_w400_h200" alt="" >
 											</c:otherwise>
 										</c:choose>
 										<input type="button" class="btn" value="浏览" id="brandLogo" >
