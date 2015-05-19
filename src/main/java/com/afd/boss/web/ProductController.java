@@ -9,6 +9,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -45,6 +47,8 @@ import com.afd.staff.model.TStaff;
 @Controller
 public class ProductController {
 	
+	protected static final Logger logger = LoggerFactory.getLogger(ProductController.class);
+
 	@Autowired
 	IProductService productService;
 	@Autowired
@@ -86,10 +90,14 @@ public class ProductController {
 		if(null != list && !list.isEmpty()){
 			for (Product p : list) {
 				BaseCategoryInfoVO bc = this.categoryService.getBaseCategoryInfoByBcId(p.getBcId());
-				String displayBcName = bc.getPathName().trim().replace("|", "/");
-				p.setBcName(displayBcName +"/"+ bc.getBcName());
-				Seller seller = sellerService.getSellerById(p.getSellerId());
-				p.setCoName(seller.getCoName());
+				if(null != bc){
+					String displayBcName = bc.getPathName().trim().replace("|", "/");
+					p.setBcName(displayBcName +"/"+ bc.getBcName());
+					Seller seller = sellerService.getSellerById(p.getSellerId());
+					p.setCoName(seller.getCoName());
+				}else{
+					logger.error("ICategoryService#getBaseCategoryInfoByBcId  return null !");
+				}
 			}
 		}
 		
@@ -123,10 +131,14 @@ public class ProductController {
 		if(null != list && !list.isEmpty()){
 			for (Product p : list) {
 				BaseCategoryInfoVO bc = this.categoryService.getBaseCategoryInfoByBcId(p.getBcId());
-				String displayBcName = bc.getPathName().trim().replace("|", "/");
-				p.setBcName(displayBcName +"/"+ bc.getBcName());
-				Seller seller = sellerService.getSellerById(p.getSellerId());
-				p.setCoName(seller.getCoName());
+				if(null != bc){
+					String displayBcName = bc.getPathName().trim().replace("|", "/");
+					p.setBcName(displayBcName +"/"+ bc.getBcName());
+					Seller seller = sellerService.getSellerById(p.getSellerId());
+					p.setCoName(seller.getCoName());
+				}else{
+					logger.error("ICategoryService#getBaseCategoryInfoByBcId  return null !");
+				}
 			}
 		}
 		
