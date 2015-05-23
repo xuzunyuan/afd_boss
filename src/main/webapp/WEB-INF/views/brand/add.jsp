@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<title>品牌增加-巨有利</title>
+<title>品牌增加-巨友利</title>
 </head>
 <body>
 	<script type="text/javascript" src="../static/js/jquery.md.js?t=2014071601"></script>

@@ -6,14 +6,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<title>巨有利BOSS管理系统</title>
+<title>巨友利BOSS管理系统</title>
 </head>
 <body>
 	<div class="returns-operation">
                     	<ul class="welcome-ul">
                         	<li class="welcome-ul-img"><img src="<%= request.getContextPath() %>/static/img/welcome.jpg" width="225" height="225"></li>
                             <li class="welcome-ul-text">
-                            	欢迎使用巨有利<br>
+                            	欢迎使用巨友利<br>
 								运营后台管理系统！
                             </li>
                         </ul>

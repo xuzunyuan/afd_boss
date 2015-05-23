@@ -10,7 +10,7 @@
 <script type="text/javascript" src="<%= request.getContextPath() %>/static/js/analyze.baidu.js"></script>
 <script type="text/javascript" src="<%= request.getContextPath() %>/static/js/jquery-1.10.2.min.js?t=2014051601"></script>
 <link rel="stylesheet" href="static/style/classes.css?t=2015013001" />
-<title>欢迎登录巨有利boss系统</title>
+<title>欢迎登录巨友利boss系统</title>
 </head>
 <body class="login-bgcolor">
 	<form id="frm" action="<%= request.getContextPath() %>/login/validate" method="post">	
@@ -19,7 +19,7 @@
 	<div class="login-bd">
     	<div class="login-main clearfix">
         	<div class="header">
-            	<h1><a href="#" title="">巨有利</a><span>后台管理系统</span></h1>
+            	<h1><a href="#" title="">巨友利</a><span>后台管理系统</span></h1>
             </div>
             <div class="login-form">
             	<div class="l-f-title">用户登录<i></i></div>
