@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<title>品牌审核详情-afd</title>
+<title>品牌审核详情-巨有利</title>
 </head>
 <body>
 	<script type="text/javascript" src="../static/js/jquery.md.js?t=2014071601"></script>

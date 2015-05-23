@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<title>专场管理-阿凡达</title>
+<title>专场管理-巨有利</title>
 </head>
 <body>
 
@@ -17,7 +17,7 @@
 
 <div class="mod-info info-details">
 	<dl>
-		<dt><img style="width:80px;height:80px;" src="${my:random(imgGetUrl).concat(brandShow.showBannerImg)}"/></dt>
+		<dt><img style="width:80px;height:80px;" src="${my:random(imgGetUrl)}${brandShow.homeBannerImg}&op=s0_w80_h80"/></dt>
 		<dd>
 			<p>活动名称：<b><c:out value="${brandShow.title}"/></b></p>
 			<p>活动类型：品牌特卖</p>
@@ -64,7 +64,7 @@
 										<label>专场页Banner：</label>
 									</dt>
 									<dd class="item-cont">
-										<div class="item-prve"><img style="width:497px;height:96px;" src="${my:random(imgGetUrl).concat(brandShow.showBannerImg)}"/></div>
+										<div class="item-prve"><img style="width:497px;height:96px;" src="${my:random(imgGetUrl)}${brandShow.homeBannerImg}&op=s0_w1497_h96"/></div>
 									</dd>
 								</dl>
 								<dl class="item">
@@ -72,7 +72,7 @@
 										<label>首页Banner：</label>
 									</dt>
 									<dd class="item-cont">
-										<div class="item-prve"><img style="width:215px;height:86px;" src="${my:random(imgGetUrl).concat(brandShow.homeBannerImg)}"/></div>
+										<div class="item-prve"><img style="width:215px;height:86px;" src="${my:random(imgGetUrl)}${brandShow.homeBannerImg}&op=s0_w1215_h86"/></div>
 									</dd>
 								</dl>
 								<dl class="item">
@@ -211,7 +211,7 @@
 											</c:if>
 										</c:forEach>
 									<td rowspan="${rowspan}" class="borderR goodsdetal">
-										<div class="item-prve"><a href="#"><img style="width:100px;height:100px;" src="${my:random(imgGetUrl).concat(brandShowDetail.prodImg)}"></a></div>
+										<div class="item-prve"><a href="#"><img style="width:100px;height:100px;" src="${my:random(imgGetUrl)}${brandShow.homeBannerImg}"></a></div>
 										<p class="title"><a href="#"><c:out value="${brandShowDetail.prodName}"/></a></p>
 										<p>货号：<c:out value="${brandShowDetail.artNo}"/></p>
 										<p>品牌：<c:out value="${brandShowDetail.brandName}"/></p>

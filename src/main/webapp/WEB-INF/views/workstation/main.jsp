@@ -110,7 +110,7 @@ private TResource getFolder(int folderId, List<TResource> allFolder) {
 <script type="text/javascript" src="<%= request.getContextPath() %>/static/js/g.js?t=20150203"></script>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/static/style/classes.css?t=20150203" />
 <link rel="stylesheet" href="<%= request.getContextPath() %>/static/style/all-debug.css?t=20150203" />
-<title><decorator:title default="阿凡达BOSS管理系统"/></title>
+<title><decorator:title default="巨有利BOSS管理系统"/></title>
 <script type="text/javascript">
 $().ready(function(){
 	var folder = $('h3[folderId]'), menu = $('a[menuId]');
@@ -177,7 +177,7 @@ function initMenu() {
 	<div class="wrapper">
 		<div id="hd">
         	<div class="header">
-				<h1><a href="#" title="">阿凡达</a><span>后台管理系统</span></h1>
+				<h1><a href="#" title="">巨有利</a><span>后台管理系统</span></h1>
                 <ul class="header-menu">
                 	<li>欢迎您， <c:out value="${currentStaff.realName}"></c:out> <!-- （<c:out value="${currentStaff.nickName}"></c:out>） --><li>
                     <li><!-- <a href="<%= request.getContextPath() %>/myAccount/view?m=-1">我的账号</a>| --><a href="<%= request.getContextPath() %>/logout">退出</a></li>

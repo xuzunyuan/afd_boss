@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<title>专场审核-阿凡达</title>
+<title>专场审核-巨有利</title>
 </head>
 <body>
 
@@ -74,7 +74,7 @@
 										<label>首页Banner：</label>
 									</dt>
 									<dd class="item-cont">
-										<div class="item-prve"><img style="width:215px;height:86px;" src="${my:random(imgGetUrl).concat(brandShow.homeBannerImg)}"/></div>
+										<div class="item-prve"><img style="width:215px;height:86px;" src="${my:random(imgGetUrl).concat(brandShow.homeBannerImg)}&op=s0_w468_h240"/></div>
 									</dd>
 								</dl>
 								<dl class="item">

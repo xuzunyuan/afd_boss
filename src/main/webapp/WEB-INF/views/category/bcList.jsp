@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<title>基础类目管理-阿凡达</title>
+<title>基础类目管理-巨有利</title>
 </head>
 <body>
 	<!--<div class="crumbs-box">
