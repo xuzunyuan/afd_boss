@@ -23,6 +23,8 @@
 			<p>活动类型：品牌特卖</p>
 			<p>公司名称：<c:out value="${brandShow.coName}"/></p>
 			<p>申请时间：<fmt:formatDate value="${brandShow.createByDate}" pattern="yyyy-MM-dd HH:mm:ss"/></p>
+			<p>开始时间：<fmt:formatDate value="${brandShow.startDate}" pattern="yyyy-MM-dd HH:mm:ss"/></p>
+			<p>截止时间：<fmt:formatDate value="${brandShow.endDate}" pattern="yyyy-MM-dd HH:mm:ss"/></p>
 			<p>活动状态：<em><c:choose>
 					<c:when test="${brandShow.status == '1'}">进行中</c:when>
 					<c:when test="${brandShow.status == '2'}">结束</c:when>
