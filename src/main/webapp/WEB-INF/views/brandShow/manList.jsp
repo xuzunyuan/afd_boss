@@ -82,14 +82,16 @@
 	<div class="tableWrap">
 		<table class="table tableA">
 			<colgroup>
+				<col width="40" />
 				<col width="60" />
-				<col width="80" />
 				<col width="140" />
-				<col width="120" />
+				<col width="70" />
 				<col />
-				<col width="140" />
-				<col width="120">	
-				<col width="120">
+				<col width="128" />
+				<col width="170">	
+				<col width="128" />
+				<col width="128" />
+				<col width="100" />
 			</colgroup>
 			<thead>
 				<tr>
@@ -100,6 +102,8 @@
 					<th>公司名称</th>
 					<th>申请时间</th>
 					<th>状态</th>
+					<th>专场开始时间</th>
+					<th>专场结束时间</th>
 					<th>操作</th>
 				</tr>
 			</thead>
@@ -129,6 +133,8 @@
 								<c:when test="${brandShow.status == '8'}">驳回</c:when>	
 							</c:choose>			
 						</td>
+						<td><p><fmt:formatDate value="${brandShow.startDate}" pattern="yyyy-MM-dd HH:mm:ss"/></p></td>
+						<td><p><fmt:formatDate value="${brandShow.endDate}" pattern="yyyy-MM-dd HH:mm:ss"/></p></td>
 						<td class="t-operate">
 							<div class="mod-operate">
 								<div class="def"><a href="manPage?brandShowId=${brandShow.brandShowId}">查看详情</a><i class="arr"></i></div>
