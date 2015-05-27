@@ -110,7 +110,7 @@
 			<tbody>
 				<c:if test="${empty(brandShowPage.result)}">
 					<tr class="emptyGoods">
-						<td colspan="8">暂无符合条件的查询结果</td>
+						<td colspan="10">暂无符合条件的查询结果</td>
 					</tr>
 				</c:if>
 				
