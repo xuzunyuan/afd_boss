@@ -46,7 +46,7 @@
 							</tr>
 							<tr>
 								<th>专场名称：</th>
-								<td><a href="#"><c:out value="${order.brandShowTitle}"></c:out></a></td>
+								<td><a href="${ctx}/brandShow/manPage?brandShowId=${order.brandShowId}"><c:out value="${order.brandShowTitle}"></c:out></a></td>
 							</tr>
 						</tbody>
 					</table>
@@ -162,7 +162,7 @@
 	                            <dl class="o-goodsName">
 	                            	<dt><img src="${my:random(imgGetUrl)}${orderItem.prodImg}&op=s1_w40_h40_e1-c3_w40_h40"></dt>
 	                            	<dd>
-	                            		<a target="_blank" href="#"><c:out value="${orderItem.prodTitle}"></c:out></a>
+	                            		<a target="_blank" href="${ctx}/product/productDetail?prodId=${orderItem.prodId}"><c:out value="${orderItem.prodTitle}"></c:out></a>
 	                            		<p class="o-property">
 	                            			<c:forEach items="${orderItem.specNames}" var="spec">
 												<span><c:out value="${spec.key}" /> : <c:out value="${spec.value}" /></span>
