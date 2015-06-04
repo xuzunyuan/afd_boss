@@ -151,7 +151,7 @@
 								</dt>
 								<dd class="item-cont">
 									<div class="mod-pic pic-papers">
-										<img src="${my:random(imgGetUrl).concat(apply.btImg)}" alt="">
+										<img src="${my:random(imgGetUrl).concat(apply.btImg)}&op=s2_w110_h110" alt="">
 										<div class="maskBar"></div>
 										<p class="textBar"><a href="${my:random(imgGetUrl).concat(apply.btImg)}" target="_blank">查看大图</a></p>
 									</div>
@@ -163,7 +163,7 @@
 								</dt>
 								<dd class="item-cont">
 									<div class="mod-pic pic-papers">
-										<img src="${my:random(imgGetUrl).concat(apply.orgCodeImg)}" alt="">
+										<img src="${my:random(imgGetUrl).concat(apply.orgCodeImg)}&op=s2_w110_h110" alt="">
 										<div class="maskBar"></div>
 										<p class="textBar"><a href="${my:random(imgGetUrl).concat(apply.orgCodeImg)}" target="_blank">查看大图</a></p>
 									</div>
@@ -177,7 +177,7 @@
 								</dt>
 								<dd class="item-cont">
 									<div class="mod-pic pic-papers">
-										<img src="${my:random(imgGetUrl).concat(apply.taxImg)}" alt="">
+										<img src="${my:random(imgGetUrl).concat(apply.taxImg)}&op=s2_w110_h110" alt="">
 										<div class="maskBar"></div>
 										<p class="textBar"><a href="${my:random(imgGetUrl).concat(apply.taxImg)}"  target="_blank">查看大图</a></p>
 									</div>
@@ -189,7 +189,7 @@
 								</dt>
 								<dd class="item-cont">
 									<div class="mod-pic pic-papers">
-										<img src="${my:random(imgGetUrl).concat(apply.bankLicenseImg)}" alt="">
+										<img src="${my:random(imgGetUrl).concat(apply.bankLicenseImg)}&op=s2_w110_h110" alt="">
 										<div class="maskBar"></div>
 										<p class="textBar"><a href="${my:random(imgGetUrl).concat(apply.bankLicenseImg)}"  target="_blank">查看大图</a></p>
 									</div>

@@ -66,7 +66,7 @@
 										<label>专场页Banner：</label>
 									</dt>
 									<dd class="item-cont">
-										<div class="item-prve"><img style="width:497px;height:96px;" src="${my:random(imgGetUrl).concat(brandShow.showBannerImg)}"/></div>
+										<div class="item-prve"><img src="${my:random(imgGetUrl).concat(brandShow.showBannerImg)}&op=s2_w497_h96"/></div>
 									</dd>
 								</dl>
 								<dl class="item">
@@ -74,7 +74,7 @@
 										<label>首页Banner：</label>
 									</dt>
 									<dd class="item-cont">
-										<div class="item-prve"><img style="width:215px;height:86px;" src="${my:random(imgGetUrl).concat(brandShow.homeBannerImg)}&op=s0_w468_h240"/></div>
+										<div class="item-prve"><img src="${my:random(imgGetUrl).concat(brandShow.homeBannerImg)}&op=s2_w215_h86"/></div>
 									</dd>
 								</dl>
 								<dl class="item">

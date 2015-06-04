@@ -197,7 +197,7 @@
 				if(index == 0){
 					var jq = $("<li>"+
 							"<div class=\"mod-pic\">"+
-							"<img src=\"${my:random(imgGetUrl)}${s.skuImgUrl}\" alt=\"\" />"+
+							"<img src=\"${my:random(imgGetUrl)}${s.skuImgUrl}&op=s2_w86_h86\" alt=\"\" />"+
 							"<div class=\"maskBar\"></div>"+
 							"<p class=\"textBar\"><a id=\"look\" href=\"${my:random(imgGetUrl)}${s.skuImgUrl}\">查看大图</a></p>"+
 						"</div>"+

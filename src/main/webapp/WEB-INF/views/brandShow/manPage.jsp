@@ -65,7 +65,7 @@
 										<label>专场页Banner：</label>
 									</dt>
 									<dd class="item-cont">
-										<div class="item-prve"><img style="width:497px;height:96px;" src="${my:random(imgGetUrl)}${brandShow.homeBannerImg}&op=s0_w1497_h96"/></div>
+										<div class="item-prve"><img src="${my:random(imgGetUrl)}${brandShow.homeBannerImg}&op=s2_w497_h96"/></div>
 									</dd>
 								</dl>
 								<dl class="item">
@@ -73,7 +73,7 @@
 										<label>首页Banner：</label>
 									</dt>
 									<dd class="item-cont">
-										<div class="item-prve"><img style="width:215px;height:86px;" src="${my:random(imgGetUrl)}${brandShow.homeBannerImg}&op=s0_w1215_h86"/></div>
+										<div class="item-prve"><img src="${my:random(imgGetUrl)}${brandShow.homeBannerImg}&op=s2_w215_h86"/></div>
 									</dd>
 								</dl>
 								<dl class="item">
@@ -212,7 +212,7 @@
 											</c:if>
 										</c:forEach>
 									<td rowspan="${rowspan}" class="borderR goodsdetal">
-										<div class="item-prve"><a href="#"><img style="width:100px;height:100px;" src="${my:random(imgGetUrl)}${brandShow.homeBannerImg}"></a></div>
+										<div class="item-prve"><a href="#"><img src="${my:random(imgGetUrl)}${brandShow.homeBannerImg}&op=s2_w100_h100"></a></div>
 										<p class="title"><a href="#"><c:out value="${brandShowDetail.prodName}"/></a></p>
 										<p>货号：<c:out value="${brandShowDetail.artNo}"/></p>
 										<p>品牌：<c:out value="${brandShowDetail.brandName}"/></p>
