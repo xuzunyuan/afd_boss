@@ -224,7 +224,7 @@ function initMenu() {
 					<a href="#" target="_blank">帮助中心</a>|
 					<a href="#" target="_blank">版权声明</a>
 				</div>
-				<p class="copyright">Copyright © 2013-2015 shop.com All Rights Reserved.</p>
+				<p class="copyright">Copyright © 2013-2015 juyouli.com All Rights Reserved.</p>
 				<p><span>ICP经营许可证号：京AA-01334408</span></p>
 					
 			</div>
